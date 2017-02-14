@@ -10,7 +10,7 @@ To embed diagrams in this Wiki, clone the wiki (https://github.com/jgraph/draw.i
 
 Here is an example:
 
-![Database Schema](images/schema.png)
+![Database Schema](images/test_Database_UML_Diagram.png)
 
 [Lightbox](https://www.draw.io/?chrome=0&lightbox=1&url=https%3A%2F%2Fraw.githubusercontent.com%2Fwiki%2Fjgraph%2Fdraw.io%2Fimages%2Fschema.png%3Ft%3D0)
 

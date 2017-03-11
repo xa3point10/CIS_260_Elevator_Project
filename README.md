@@ -1,7 +1,7 @@
 # CIS_260_Elevator_Project  FIXED!
 
 # Ixe's working dev Branch: bIxe
-# Alex's working dev Branch:
+# Alex's working dev Branch: bAlex
 
 
 

@@ -1,41 +1,58 @@
 package pckElevator_V1;
 
 public class Elevator {
-    //DEBUG
-    public static final int maxFloor = 6;  //should live In floor class
-    public static final int minFloor = 1;  //should live In floor class
+    // data
+    //------------------------------
+    public static int maxFloor = 0;
+    public static int minFloor = 0;
     
-    private static final int directionUp = +1;  // -1: down,  +1: up 
-    private static final int directionDown = -1;  // -1: down,  +1: up 
-    // +1 Floor
+    private static final int directionUp = +1;
+    private static final int directionDown = -1;
+    
+    //  -1..Down +1..Up
     private int direction = directionUp;
-    
-    //data
-    private int floor = 1 ;
-    private int state = 0;  //up, down, standing, visitors
-    
-    //constructors
-    public Elevator (int floor){
+
+    // internal floor index
+    private int floor = 0; // in range 0, 1, 2, ..., maxFloor-1
+
+    private int state = 0; // moving up, moving down, standing
+    private String label;
+
+    public String getLabel() {
+        return label;
+    }
+    //------------------------------
+    // constructors
+    //------------------------------
+    public Elevator( String label, int floor )
+    {
+        this.label = label;
         this.floor = floor;
-    }
+    }//Elevator
     
-    void move(){
-        floor = floor + direction;
-        if ( floor > maxFloor){
-            floor = maxFloor;
-            direction = directionDown;
-        } else if ( floor < minFloor ) {
-            floor = minFloor;
-            direction = directionUp;
+    //------------------------------
+    // operations
+    //------------------------------
+    public void move()
+    {
+        int newFloor = this.floor + direction;
+        if ( newFloor >= maxFloor ) {
+            this.floor = maxFloor - 1;
+            this.direction = directionDown;
+
+        } else if ( newFloor <= minFloor ) {
+            this.floor = minFloor;
+            this.direction = directionUp;
+
+        } else {
+            this.floor = newFloor;
         }
-    }
-    void moveDown(){
-        floor --;
-    }
-    
+    }//move
+
     public int getFloor() {
         return floor;
-    }
+    }//getFloor
+    
     
     
 }//class Elevator

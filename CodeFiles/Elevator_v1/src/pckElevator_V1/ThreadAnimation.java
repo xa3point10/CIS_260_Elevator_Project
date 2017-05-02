@@ -5,13 +5,13 @@ public class ThreadAnimation implements Runnable {
     // data
     //------------------------------
     private static final int ANIMATION_TIMEOUT = 500; //one second
-    private ControllerDemo controller;
+    private Controller controller;
 
     
     //------------------------------
     // constructors
     //------------------------------
-    public ThreadAnimation(ControllerDemo controller) {
+    public ThreadAnimation(Controller controller) {
         this.controller = controller;
     }// ThreadAnimation
 

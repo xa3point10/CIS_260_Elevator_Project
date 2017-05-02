@@ -1,6 +1,10 @@
 package pckElevator_V1;
 
-public class Elevator {
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.lang.model.element.Element;
+
+public class Elevator implements IElement{
     // data
     //------------------------------
     public static int maxFloor = 0;
@@ -18,9 +22,6 @@ public class Elevator {
     private int state = 0; // moving up, moving down, standing
     private String label;
 
-    public String getLabel() {
-        return label;
-    }
     //------------------------------
     // constructors
     //------------------------------
@@ -33,6 +34,47 @@ public class Elevator {
     //------------------------------
     // operations
     //------------------------------
+    @Override
+    public void accept( IVisitor visitor ){
+        visitor.visit( this );
+    }
+    // ***** recomended add from class conversation
+    @Override
+    public void release( IVisitor visitor ){
+//        ArrayList< Element > elements = new ArrayList<>();
+//
+//        visitor.getClass().getTypeName();
+//        
+//        Element temp = new Element();
+//        elements.add( temp );
+//        elements.add( new IVisitor() );
+//        elements.add( new IVisitor() );
+//        
+//        // for ( Element element : elements ) {...}
+//        // it is an iterator. 
+//        // remembers how to 
+//        Iterator<Element> it = elements.iterator();
+//          // could be done in a while loop it.hasNext()
+//        for ( ; it.hasNext(); ) {
+//            Element element = it.next();
+//          // compare both
+//            if ( element == temp ) {
+//                System.out.print( "removing " );
+//                System.out.println( element );
+//                // iterator allows stable loop while removing the content
+//                it.remove();
+//                continue;
+//            }
+//            System.out.println( element );
+//        }
+    }
+    
+    
+    public void arrived( int floor ){ 
+        // needs to be finished
+    }
+    
+    //@Override
     public void move()
     {
         int newFloor = this.floor + direction;
@@ -48,10 +90,14 @@ public class Elevator {
             this.floor = newFloor;
         }
     }//move
+    
+    public String getLabel() { return label; }
+    
 
-    public int getFloor() {
-        return floor;
-    }//getFloor
+    public int getFloor() { 
+        System.out.println("DEBUG Class Elevator; Floor: " + floor);
+        return floor; 
+    }
     
     
     

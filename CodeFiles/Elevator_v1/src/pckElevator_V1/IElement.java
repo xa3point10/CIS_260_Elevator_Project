@@ -7,8 +7,13 @@ public interface IElement {
     // Elements can accapt & release Visitors
     void accept( IVisitor visitor );
     void release( IVisitor visitor );
+    
+    //***************
+    // To: do
+    // Create the callElevatorButton()
+    void callElevatorButton( Floor floor );
 
-  
+    
     //------------------------------
     // NEW operations! from Merge File
     //--------------b----------------

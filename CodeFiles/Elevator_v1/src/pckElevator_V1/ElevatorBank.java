@@ -16,37 +16,22 @@ public class ElevatorBank {
     // setScenario  
     private ArrayList< Elevator> elevators;
     private ArrayList< Floor> floors;
+    //private ArrayList< IVisitor > elevatorRiders;
 
     // constructors
     //------------------------------
     public ElevatorBank() {
         elevators = new ArrayList<>();
         floors = new ArrayList<>();
+        //elevatorRiders = new ArrayList<>();
     }//ElevatorBank()
 
-    //------------------------------
     // operations
     //------------------------------
-    // Only allow Access through the mutex Lock
-    public static ElevatorBank GetInstance() { // Access through the mutex Lock
-        Lock lock = new Lock(mMutex); // automatically locks
-
-        if (mInstance == null) {
-            mInstance = new ElevatorBank();
-        }
-        lock.release(); // don't forget to unlock
-
-        return mInstance;
-    }//GetInstance
-
-    public void addElevator(Elevator elevator) {
-        elevators.add(elevator);
-    }//addElevator
-
-    public void updateConfiguration(int numberOfFloors, int numberOfElevators, int numberOfVisitors) {
+    public void updateConfiguration(int numberOfFloors, int numberOfElevators /*, int elevatorRiders */) {
         elevators.clear();  // use Arraylist Clear() method
         floors.clear();     // use Arraylist Clear() method
-        
+        // needs visiors   
         // populate the floors
         for (int idx = 0; idx < numberOfFloors; ++idx) {
             Floor floor = null;
@@ -59,17 +44,36 @@ public class ElevatorBank {
             }
             addFloor(floor);
         }
-        // populate the elevators
+        // populate the elevators and create the lavels
         for (int idx = 0; idx < numberOfElevators; ++idx) {
             Elevator elevator = null; // construct an Elevator Object
-            char elevatorLabel = 'A';
-            elevatorLabel += (char) idx;
+            int elevTableLabel = 1;
+            elevTableLabel += idx;
             //Fill that Elevator object
-            elevator = new Elevator(Character.toString(elevatorLabel), idx);
+            elevator = new Elevator(
+                    "E"+elevTableLabel,         // Label for each Elevator
+                    idx,  3                      // starting position before move
+                    //elevator.getElevatorRiders() // how many  visitors?   
+            );                    
             addElevator(elevator);
         }
     }//updateConfiguration
-
+   
+    
+    // ************ ELEVATORS ************
+//    public IVisitor getElevatorRider(int individualVisitor) {
+//        return elevatorRiders.get(individualVisitor);
+//    }//getElevator
+//    
+//    public ArrayList<IVisitor> getVisitors() {
+//        return elevatorRiders;
+//    }//getElevators
+//    
+//    public void addVisitor(IVisitor visitors) {
+//        elevatorRiders.add(visitors);
+//    }// 
+    
+    // ************ ELEVATORS ************
     public Elevator getElevator(int elevatorSeqNumber) {
         return elevators.get(elevatorSeqNumber);
     }//getElevator
@@ -77,17 +81,33 @@ public class ElevatorBank {
     public ArrayList<Elevator> getElevators() {
         return elevators;
     }//getElevators
+    
+    public void addElevator(Elevator elevator) {
+        elevators.add(elevator);
+    }//addElevator
 
-    public void addFloor(Floor floor) {
-        floors.add(floor);
-    }//addFloor
-
+    // ************ Floors ************
     public Floor getFloor(int floorSeqNumber) {
-        return floors.get(floorSeqNumber);
+        return floors.get( floorSeqNumber );
     }//getFloor
 
     public ArrayList<Floor> getFloors() {
         return floors;
     }//getFloors
+    
+    public void addFloor(Floor floor) {
+        floors.add(floor);
+    }//addFloor
+    
+    // INSTANCE!
+     public static ElevatorBank GetInstance() { // Access through the mutex Lock
+        Lock lock = new Lock(mMutex); // automatically locks
 
+        if (mInstance == null) {
+            mInstance = new ElevatorBank();
+        }
+        lock.release(); // don't forget to unlock
+
+        return mInstance;
+    }//GetInstance
 }//class ElevatorBank

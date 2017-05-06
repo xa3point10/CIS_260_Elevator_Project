@@ -11,6 +11,7 @@ public interface IScenario {
     //******** From Oroginal MVC DEMO ******
     public int  getNumberOfVisitors();
     public void setNumberOfVisitors(int numberOfVisitors);
+    //public int  getElevatorRiders();
     
     public int getNumberOfFloors();
     public void setNumberOfFloors( int numberOfFloors );

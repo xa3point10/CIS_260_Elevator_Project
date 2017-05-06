@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JTextArea;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.imageio.ImageIO;
 
 public class WindowMainApp extends javax.swing.JFrame {
 
@@ -29,15 +30,21 @@ public class WindowMainApp extends javax.swing.JFrame {
 
         jPanellMainView = new javax.swing.JPanel();
         jtabSimulation = new javax.swing.JTabbedPane();
+        javax.swing.JPanel jpnlWelcomePanel = new javax.swing.JPanel();
+        jlblProjectName = new javax.swing.JLabel();
+        jlblProjectName1 = new javax.swing.JLabel();
+        jlblProjectName2 = new javax.swing.JLabel();
+        jlblProjectName3 = new javax.swing.JLabel();
+        jlblProjectName4 = new javax.swing.JLabel();
         jtabSelectScenario = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        javax.swing.JLabel lblScenarioType = new javax.swing.JLabel();
+        lblScenarioType = new javax.swing.JLabel();
         btnSaveScenario_1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        javax.swing.JLabel lblScenarioType2 = new javax.swing.JLabel();
+        lblScenarioType2 = new javax.swing.JLabel();
         btnSaveScenario_2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        javax.swing.JLabel lblScenarioType1 = new javax.swing.JLabel();
+        lblScenarioType1 = new javax.swing.JLabel();
         btnSaveScenario_3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -51,7 +58,64 @@ public class WindowMainApp extends javax.swing.JFrame {
         jPanellMainView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanellMainView.setToolTipText("");
 
+        jtabSimulation.setBackground(new java.awt.Color(0, 0, 0));
+        jtabSimulation.setForeground(new java.awt.Color(255, 255, 255));
+        jtabSimulation.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jtabSimulation.setToolTipText("RunSimulationTab");
+
+        jlblProjectName.setFont(new java.awt.Font("Engravers MT", 1, 35)); // NOI18N
+        jlblProjectName.setText("Elevator Project");
+
+        jlblProjectName1.setFont(new java.awt.Font("Engravers MT", 1, 20)); // NOI18N
+        jlblProjectName1.setText("Project Morpheus");
+
+        jlblProjectName2.setFont(new java.awt.Font("Engravers MT", 1, 20)); // NOI18N
+        jlblProjectName2.setText("Alex Kozlowski");
+
+        jlblProjectName3.setFont(new java.awt.Font("Engravers MT", 1, 20)); // NOI18N
+        jlblProjectName3.setText("By:");
+
+        jlblProjectName4.setFont(new java.awt.Font("Engravers MT", 1, 20)); // NOI18N
+        jlblProjectName4.setText("Ixe Velazquez");
+
+        javax.swing.GroupLayout jpnlWelcomePanelLayout = new javax.swing.GroupLayout(jpnlWelcomePanel);
+        jpnlWelcomePanel.setLayout(jpnlWelcomePanelLayout);
+        jpnlWelcomePanelLayout.setHorizontalGroup(
+            jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlWelcomePanelLayout.createSequentialGroup()
+                .addGroup(jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlblProjectName1)
+                    .addGroup(jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpnlWelcomePanelLayout.createSequentialGroup()
+                            .addGap(169, 169, 169)
+                            .addComponent(jlblProjectName))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlWelcomePanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jlblProjectName3)
+                            .addGap(48, 48, 48)
+                            .addGroup(jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlblProjectName2)
+                                .addComponent(jlblProjectName4))
+                            .addGap(25, 25, 25))))
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+        jpnlWelcomePanelLayout.setVerticalGroup(
+            jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlWelcomePanelLayout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(jlblProjectName)
+                .addGap(18, 18, 18)
+                .addComponent(jlblProjectName1)
+                .addGap(81, 81, 81)
+                .addGroup(jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblProjectName3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblProjectName4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jlblProjectName2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
+        );
+
+        jtabSimulation.addTab("Welcome!", jpnlWelcomePanel);
 
         jtabSelectScenario.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
@@ -74,7 +138,7 @@ public class WindowMainApp extends javax.swing.JFrame {
                 .addComponent(lblScenarioType)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(338, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -83,7 +147,7 @@ public class WindowMainApp extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblScenarioType, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 602, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_1)
                 .addGap(100, 100, 100))
         );
@@ -113,14 +177,14 @@ public class WindowMainApp extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(btnSaveScenario_2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblScenarioType2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 602, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_2)
                 .addGap(100, 100, 100))
         );
@@ -146,7 +210,7 @@ public class WindowMainApp extends javax.swing.JFrame {
                 .addComponent(lblScenarioType1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(339, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -155,7 +219,7 @@ public class WindowMainApp extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblScenarioType1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 602, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_3)
                 .addGap(100, 100, 100))
         );
@@ -177,6 +241,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblSimulation);
 
+        btnRunSimulation.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnRunSimulation.setText("Run");
         btnRunSimulation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,23 +263,23 @@ public class WindowMainApp extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnRunSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(105, 105, 105)
-                        .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRunSimulation)
-                    .addComponent(btnStopSimulation))
-                .addGap(92, 92, 92))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                .addGap(55, 55, 55)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55))
         );
 
         jtabSimulation.addTab("2. Run Simulation", jPanel1);
@@ -223,60 +288,43 @@ public class WindowMainApp extends javax.swing.JFrame {
         jPanellMainView.setLayout(jPanellMainViewLayout);
         jPanellMainViewLayout.setHorizontalGroup(
             jPanellMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanellMainViewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtabSimulation)
-                .addContainerGap())
+            .addComponent(jtabSimulation)
         );
         jPanellMainViewLayout.setVerticalGroup(
             jPanellMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanellMainViewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtabSimulation)
-                .addContainerGap())
+            .addComponent(jtabSimulation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanellMainView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanellMainView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanellMainView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanellMainView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunSimulationActionPerformed
-        // call Controller to run 
-        controller.runSimulation();
-    }//GEN-LAST:event_btnRunSimulationActionPerformed
 
     private void btnStopSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopSimulationActionPerformed
         // call controller to stop
         controller.stopSimulation();
     }//GEN-LAST:event_btnStopSimulationActionPerformed
 
-    private void btnSaveScenario_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_1ActionPerformed
-        // This needs custom coding of input from user
-        controller.customScenario(          // Fill Custom Settings
-                9 /*numberOfFloors*/,
-                1 /*numberOfElevators*/, 
-                7 /*numberOfVisitors*/); 
-        controller.setScenario(0);          // set the Custom (0) scenario 
+    private void btnRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunSimulationActionPerformed
+        // call Controller to run
+        controller.runSimulation();
+    }//GEN-LAST:event_btnRunSimulationActionPerformed
+
+    private void btnSaveScenario_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_3ActionPerformed
+        controller.setScenario(2);          // set the scenario to the right type
         configureBuildingDisplay();         // configure the display table
         update();                           // update table to display scenario
         jtabSimulation.setSelectedIndex(1); // Go-to Simlation tab view
-    }//GEN-LAST:event_btnSaveScenario_1ActionPerformed
+    }//GEN-LAST:event_btnSaveScenario_3ActionPerformed
 
     private void btnSaveScenario_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_2ActionPerformed
         controller.setScenario(1);          // set the scenario to the right type
@@ -285,12 +333,17 @@ public class WindowMainApp extends javax.swing.JFrame {
         jtabSimulation.setSelectedIndex(1);  // update table to display scenario
     }//GEN-LAST:event_btnSaveScenario_2ActionPerformed
 
-    private void btnSaveScenario_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_3ActionPerformed
-        controller.setScenario(2);          // set the scenario to the right type
+    private void btnSaveScenario_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_1ActionPerformed
+        // This needs custom coding of input from user
+        controller.customScenario(          // Fill Custom Settings
+            9 /*numberOfFloors*/,
+            1 /*numberOfElevators*/,
+            7 /*numberOfVisitors*/);
+        controller.setScenario(0);          // set the Custom (0) scenario
         configureBuildingDisplay();         // configure the display table
-        update();                           // update table to display scenario 
+        update();                           // update table to display scenario
         jtabSimulation.setSelectedIndex(1); // Go-to Simlation tab view
-    }//GEN-LAST:event_btnSaveScenario_3ActionPerformed
+    }//GEN-LAST:event_btnSaveScenario_1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -431,9 +484,18 @@ public class WindowMainApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanellMainView;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jlblProjectName;
+    private javax.swing.JLabel jlblProjectName1;
+    private javax.swing.JLabel jlblProjectName2;
+    private javax.swing.JLabel jlblProjectName3;
+    private javax.swing.JLabel jlblProjectName4;
     private javax.swing.JTabbedPane jtabSelectScenario;
     private javax.swing.JTabbedPane jtabSimulation;
+    private javax.swing.JLabel lblScenarioType;
+    private javax.swing.JLabel lblScenarioType1;
+    private javax.swing.JLabel lblScenarioType2;
     private javax.swing.JTable tblSimulation;
     // End of variables declaration//GEN-END:variables
 
 }
+

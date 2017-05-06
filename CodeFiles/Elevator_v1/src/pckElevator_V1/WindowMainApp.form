@@ -26,11 +26,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jPanellMainView" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
+=======
+          <Component id="jPanellMainView" alignment="0" max="32767" attributes="0"/>
+>>>>>>> master
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,31 +61,154 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jtabSimulation" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+=======
+              <Component id="jtabSimulation" alignment="0" max="32767" attributes="0"/>
+>>>>>>> master
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jtabSimulation" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+=======
+              <Component id="jtabSimulation" alignment="1" pref="798" max="32767" attributes="0"/>
+>>>>>>> master
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JTabbedPane" name="jtabSimulation">
           <Properties>
+<<<<<<< HEAD
+=======
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="tabLayoutPolicy" type="int" value="1"/>
+>>>>>>> master
             <Property name="toolTipText" type="java.lang.String" value="RunSimulationTab"/>
           </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
+<<<<<<< HEAD
+=======
+            <Container class="javax.swing.JPanel" name="jpnlWelcomePanel">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Welcome!">
+                    <Property name="tabTitle" type="java.lang.String" value="Welcome!"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jlblProjectName1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
+                                      <Component id="jlblProjectName" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jlblProjectName3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlblProjectName2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlblProjectName4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="234" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                          <Component id="jlblProjectName" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jlblProjectName1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblProjectName3" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jlblProjectName4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="jlblProjectName2" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="328" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jlblProjectName">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Engravers MT" size="35" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Elevator Project"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlblProjectName1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Engravers MT" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Project Morpheus"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlblProjectName2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Engravers MT" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Alex Kozlowski"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlblProjectName3">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Engravers MT" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="By:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlblProjectName4">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Engravers MT" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ixe Velazquez"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+>>>>>>> master
             <Container class="javax.swing.JTabbedPane" name="jtabSelectScenario">
               <Properties>
                 <Property name="tabPlacement" type="int" value="2"/>
@@ -114,7 +241,11 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
                               <EmptySpace pref="71" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="338" max="32767" attributes="0"/>
+>>>>>>> master
                               <Component id="btnSaveScenario_1" min="-2" pref="453" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
@@ -125,7 +256,11 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType" min="-2" pref="28" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <EmptySpace pref="378" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="602" max="32767" attributes="0"/>
+>>>>>>> master
                               <Component id="btnSaveScenario_1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -178,7 +313,11 @@
                                       <Component id="btnSaveScenario_2" min="-2" pref="452" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+<<<<<<< HEAD
                               <EmptySpace pref="72" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="339" max="32767" attributes="0"/>
+>>>>>>> master
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -187,7 +326,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType2" min="-2" pref="28" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <EmptySpace pref="378" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="602" max="32767" attributes="0"/>
+>>>>>>> master
                               <Component id="btnSaveScenario_2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -236,7 +379,11 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
                               <EmptySpace pref="72" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="339" max="32767" attributes="0"/>
+>>>>>>> master
                               <Component id="btnSaveScenario_3" min="-2" pref="452" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
@@ -247,7 +394,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType1" min="-2" pref="28" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <EmptySpace pref="378" max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="602" max="32767" attributes="0"/>
+>>>>>>> master
                               <Component id="btnSaveScenario_3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -291,6 +442,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -302,6 +454,19 @@
                               </Group>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnRunSimulation" min="-2" pref="499" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnStopSimulation" min="-2" pref="189" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane2" min="-2" pref="804" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="68" max="32767" attributes="0"/>
+>>>>>>> master
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -309,6 +474,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+<<<<<<< HEAD
                           <Component id="jScrollPane2" min="-2" pref="310" max="-2" attributes="0"/>
                           <EmptySpace pref="75" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -316,6 +482,15 @@
                               <Component id="btnStopSimulation" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+=======
+                          <Component id="jScrollPane2" pref="560" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnRunSimulation" min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="btnStopSimulation" min="-2" pref="63" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+>>>>>>> master
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -344,6 +519,12 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="btnRunSimulation">
                   <Properties>
+<<<<<<< HEAD
+=======
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="16" style="1"/>
+                    </Property>
+>>>>>>> master
                     <Property name="text" type="java.lang.String" value="Run"/>
                   </Properties>
                   <Events>

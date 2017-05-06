@@ -6,7 +6,6 @@
 
 
 
-
 Lets try to keep the master a working version
 
 #STEPS to MERGE a branch >> into >> the master

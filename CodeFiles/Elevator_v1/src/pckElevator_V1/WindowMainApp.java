@@ -11,11 +11,11 @@ public class WindowMainApp extends javax.swing.JFrame {
     //data create 1 single sontroller
     private final Controller controller;
 
-    //pass in the reference of controller into jframe
+    //Constructor of the window
     public WindowMainApp(Controller controller) {
         this.controller = controller;
         initComponents();  // This is Created from the Design Window
-       this.setTitle("MVC Demo View");
+       this.setTitle("Prject Morpheus Elevator Project");
     }
 
     /**
@@ -268,30 +268,28 @@ public class WindowMainApp extends javax.swing.JFrame {
 
     private void btnSaveScenario_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_1ActionPerformed
         // This needs custom coding of input from user
-        controller.customScenario(
+        controller.customScenario(          // Fill Custom Settings
                 9 /*numberOfFloors*/,
-                3 /*numberOfElevators*/, 
-                1 /*numberOfVisitors*/
-        );
-        configureBuildingDisplay();
-        // update table and change the tab
-        update();
-        jtabSimulation.setSelectedIndex(1); 
+                1 /*numberOfElevators*/, 
+                7 /*numberOfVisitors*/); 
+        controller.setScenario(0);          // set the Custom (0) scenario 
+        configureBuildingDisplay();         // configure the display table
+        update();                           // update table to display scenario
+        jtabSimulation.setSelectedIndex(1); // Go-to Simlation tab view
     }//GEN-LAST:event_btnSaveScenario_1ActionPerformed
 
     private void btnSaveScenario_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_2ActionPerformed
-        controller.setScenario(0);
-        configureBuildingDisplay();
-        // update table and change the tab
-        update();
-        jtabSimulation.setSelectedIndex(1); 
+        controller.setScenario(1);          // set the scenario to the right type
+        configureBuildingDisplay();         // configure the display table
+        update();                           // update table to display scenario
+        jtabSimulation.setSelectedIndex(1);  // update table to display scenario
     }//GEN-LAST:event_btnSaveScenario_2ActionPerformed
 
     private void btnSaveScenario_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_3ActionPerformed
-        //controller.setScenario(1);
-        // update table and change the tab
-        update();
-        jtabSimulation.setSelectedIndex(1); 
+        controller.setScenario(2);          // set the scenario to the right type
+        configureBuildingDisplay();         // configure the display table
+        update();                           // update table to display scenario 
+        jtabSimulation.setSelectedIndex(1); // Go-to Simlation tab view
     }//GEN-LAST:event_btnSaveScenario_3ActionPerformed
 
     public static void main(String args[]) {
@@ -323,13 +321,12 @@ public class WindowMainApp extends javax.swing.JFrame {
         // Execute initialization of all requied business objects
         final Controller controller = new Controller();
 
-        // create and start new thread:
+        // create and start new thread: First create TheadClass Object
         ThreadAnimation thp = new ThreadAnimation(controller);
-        Thread thread = new Thread(thp);
+        Thread thread = new Thread(thp); // Place this in the thread
         thread.start();
 
         // Execute initialization of all required buseness objects
-        //controller.initUseCase();  // not used anymore
         /* create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -360,13 +357,15 @@ public class WindowMainApp extends javax.swing.JFrame {
                 columnNames[idx] = "Floor#";
             } else {
                 // floor occupancy
-                columnNames[idx] = "Visitor occupancy";
+                columnNames[idx] = "Floor Visitors";
             }
         }
         // populate table rows
         int numberOffloors = controller.getScenario().getNumberOfFloors();
         Object[][] tableContent = new Object[numberOffloors][columns];
+        //while row length is greater than Zero, decrement
         for (int row = tableContent.length - 1; row > -1; --row) {
+            // for each column, create array list of floors and fill with Flor number
             ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
             // to traverse the floors top-down, calculate index of the
             // floor as follows:
@@ -385,23 +384,31 @@ public class WindowMainApp extends javax.swing.JFrame {
     }// configureBuildingDisplay
 
     public void update() {
+        tblSimulation.clearSelection();         // at the begining of each scinario clear
         // controller calls this method to update the elevator-floor view 
         // Save scenario also calls this to visualize latest config
-        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
-        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        ArrayList<Elevator> elevatorsArray = ElevatorBank.GetInstance().getElevators();
+        ArrayList<Floor> floorsArray = ElevatorBank.GetInstance().getFloors();
+        //ArrayList<IVisitor> vistorsArray = ElevatorBank.GetInstance().getVisitors();
         int columnIndex = 0; // first elevator shown in the leftmost table column
-        for (Elevator elevator : elevators) {
-            ;
+        for (Elevator elevator : elevatorsArray) {
             // update elevator location:
-            int rowIndex = floors.size() - elevator.getFloor() - 1;
+            int rowIndex = floorsArray.size() - elevator.getFloor() - 1;  //Index is top down!
+            //int visitorIndex = vistorsArray.size();
+            // ***** POPULATE: FlOOR collumn ****************
             tblSimulation.getModel().setValueAt(
-                    elevator.getLabel() + rowIndex + " " + columnIndex/*content*/, 0, 3
+                elevator.getElevatorRiders(),         // What it reads onscreen
+                rowIndex,                                           // int Row
+                controller.getScenario().getNumberOfElevators()     // int col
             );
+            // ***** POPULATE: ELEVATOR collumn ****************
             tblSimulation.getModel().setValueAt(
-                    elevator.getLabel() + rowIndex/*content*/, rowIndex, columnIndex
+                elevator.getLabel() + ": " + elevator.getElevatorRiders(), // Elevator Name + # of Riders
+                rowIndex, 
+                columnIndex
             );
             // clear all locations:
-            for (int idx = 0; idx < floors.size(); ++idx) {
+            for (int idx = 0; idx < floorsArray.size(); ++idx) {
                 if (idx != rowIndex) {
                     tblSimulation.getModel().setValueAt(
                             null/*content*/, idx, columnIndex
@@ -409,7 +416,6 @@ public class WindowMainApp extends javax.swing.JFrame {
                 }
             }
             ++columnIndex; // next elevator shown in the next table column
-
         }// for
     }//update
 

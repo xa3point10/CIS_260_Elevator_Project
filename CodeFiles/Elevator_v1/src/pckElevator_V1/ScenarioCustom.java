@@ -9,23 +9,13 @@ public class ScenarioCustom implements IScenario{
     private int numberOfFloors = 0;
     private int numberOfElevators = 0;
     private int numberOfVisitors = 0;
-
+    
+    // constructor
     public ScenarioCustom() {
-        this.visitors = new ArrayList<>();
-        this.visitables = new ArrayList<>();
-
-        // pass in the visitors to Arraylist 
-//        visitors.add(employee);
-//        visitors.add(guest);
-//        visitors.add(Ixe);
-        getVisitables();
-        getVisitors();
-//    ElevatorBank.GetInstance().updateConfiguration(
-//               getNumberOfFloors(), getNumberOfElevators()
-//        );
+        // no specific constructor instructions
     }
     
-    // operations
+     // operations
     @Override
     public int  getNumberOfVisitors(){ return numberOfVisitors;}
     
@@ -41,25 +31,21 @@ public class ScenarioCustom implements IScenario{
     
     @Override
     public ArrayList< IVisitor >  getVisitors(){ return visitors;}
-    
-    // *******************************************
-    // ********** Below FROM ORGINAL DEMO **************
+
+    //********** FROM ORGINAL DEMO **************
     @Override
-    public int getNumberOfFloors()
-    {
+    public int getNumberOfFloors(){
         return numberOfFloors;
     }//getNumberOfFloors
     
     @Override
-    public void setNumberOfFloors( int numberOfFloors )
-    {
+    public void setNumberOfFloors( int numberOfFloors ){
         Elevator.maxFloor = numberOfFloors;
         this.numberOfFloors = numberOfFloors;
     }//setNumberOfFloors
     
     @Override
-    public int getNumberOfElevators()
-    {
+    public int getNumberOfElevators() {
         return numberOfElevators;
     }//getNumberOfElevators
 
@@ -67,7 +53,5 @@ public class ScenarioCustom implements IScenario{
     public void setNumberOfElevators( int numberOfElevators ) {
         this.numberOfElevators = numberOfElevators;
     }//setNumberOfElevators
-
-    
-    
+        
 }// class ScenarioCustom 

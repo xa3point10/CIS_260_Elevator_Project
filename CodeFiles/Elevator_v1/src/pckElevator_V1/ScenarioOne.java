@@ -28,37 +28,20 @@ public class ScenarioOne implements IScenario {
     public ScenarioOne() {
         this.visitors = new ArrayList<>();
         this.visitables = new ArrayList<>();
-//        // pass in the visitable locations 
-//        visitables.add(e1); //creates Elevator 1 
-//        visitables.add(e2); //creates Elevator 2 
-//        visitables.add(b1); //creates Floor 1 
-//        visitables.add(f1); //creates Floor 1 
-//        visitables.add(f2); //creates Floor 2 
-//        visitables.add(f3); //creates Floor 3 
-//
-//        // pass in the visitors to Arraylist 
-//        visitors.add(employee);
-//        visitors.add(guest);
-//        visitors.add(Ixe);
-//        getVisitables();
-//        getVisitors();
-//    ElevatorBank.GetInstance().updateConfiguration(
-//               getNumberOfFloors(), getNumberOfElevators(), getNumberOfVisitors()
-//        );
     }
     
-    // operations
     @Override
-    public void setIElementElevator(Elevator elevator){
-            visitables.add(elevator);
-    }
-    @Override
-    public void setIElementFloor(Floor floor){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitables.add(floor);
+    public void setAllIElements(){
+        for (int idxE = 0; idxE <= this.numberOfElevators; ++ idxE){
+        visitables.add(ElevatorBank.GetInstance().getElevator(idxE));
         }
+        for (int idxF = 0; idxF <= this.numberOfFloors; ++ idxF){
+        visitables.add(ElevatorBank.GetInstance().getFloor(idxF));
+        }
+    System.out.println("DEBUG: ScenarioCustom: setAllElements: Visitables size " 
+            + visitables.size() );
     }
-    
+     
     @Override
     public void populateVisitorsArray(){
         for (int idx = 0; idx <= numberOfVisitors -1; ++idx){

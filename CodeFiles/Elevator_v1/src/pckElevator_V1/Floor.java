@@ -5,26 +5,37 @@ import java.util.Iterator;
 
 public class Floor implements IElement {
 
-    private String label;
+    private String label;   // the label This current floor
 
     private ArrayList< IVisitor> floorVisitor;
     private int numberOfVisitors = 0;
     
     // Constructor ********************
     public Floor ( String label ) {
-        floorVisitor = new ArrayList<IVisitor>();       //added
-        this.numberOfVisitors = floorVisitor.size();    //added
+        System.out.println("DEBUG: Floor: Constructor: this floor's Label: " + label);
+        floorVisitor = new ArrayList<>();       //added
         this.label = label;   //from original CODE    
     }
-    //***************
-    // To: do
-    // Create the callElevatorButton()
-    
-    public  void callElevatorButton( Floor floor ){}
+
+    //Operations
+    public  void FloorCallButton( IElement floor, IVisitor visitor ){
+        // How do we decide a visitor presses the call Button?
+        //if ()
+        // Visitor looks at their array
+        // Visitor visits that floor for a call cycle
+        // Next cycle visitor pushes the call button. 
+        // elevator makes it way to called floor
+        // Then there is a hand off from floor to Elevator
+        // the elator gets a +1 in their array
+        // Elevator gets destination floor and proceeds to floor
+    }
     
     @Override
-    public void accept( IVisitor visitor ) {
-        visitor.visit( this );
+    public void accept( IVisitor visitor) {
+        // tell first Elevator to accept this visitor
+        this.floorVisitor.add(visitor);
+        this.numberOfVisitors = floorVisitor.size();
+        System.out.println("DEBUG: Floor: " + label + " accept(): numberOfVisitors: " + numberOfVisitors );
     }
     
     // ***** recomended add from class conversation

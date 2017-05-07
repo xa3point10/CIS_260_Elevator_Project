@@ -52,9 +52,9 @@ public class Controller {
     public void updateElevatorBankConfig() {
     ElevatorBank.GetInstance().updateConfiguration(
                         myScenario.getNumberOfFloors(),
-                        myScenario.getNumberOfElevators() /*,
-                        myScenario.getNumberOfVisitors()*/
-                );
+                        myScenario.getNumberOfElevators() );
+    // update the Scenario IElements array
+    myScenario.setAllIElements(); // with ElevatorBankInstance
     }
 
     public IScenario getScenario() {
@@ -67,6 +67,7 @@ public class Controller {
         ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
         for (Elevator elevator : elevators) {
             elevator.move();
+            elevator.elevatorWakeUp();
         }
         updateWindow();         
     }// animate

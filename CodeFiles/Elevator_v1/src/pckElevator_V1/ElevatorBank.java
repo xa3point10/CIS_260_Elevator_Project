@@ -25,11 +25,10 @@ public class ElevatorBank {
 
     // operations
     //------------------------------
-    public void updateConfiguration(int numberOfFloors, int numberOfElevators /*, int elevatorRiders */) {
+    public void updateConfiguration(int numberOfFloors, int numberOfElevators ) {
         this.maxFloor = numberOfFloors;
         elevators.clear();  // use Arraylist Clear() method
-        floors.clear();     // use Arraylist Clear() method
-        // needs visiors   
+        floors.clear();     // use Arraylist Clear() method 
         // populate the floors
         for (int idx = 0; idx < numberOfFloors; ++idx) {
             Floor floor = null;

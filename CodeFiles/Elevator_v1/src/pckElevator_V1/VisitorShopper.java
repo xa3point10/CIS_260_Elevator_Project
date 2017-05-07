@@ -16,7 +16,9 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     private String myFloorLabel;   // from ElevatorBank updateConfiguration()
     private int maxFloor;
     private int currentFloor;
+    private int myFloorIndex = 0;
     private ArrayList<Integer> visitorAgenda;
+    private ArrayList<Floor> myFloorHistory;
     
 
     // Constructor
@@ -25,21 +27,49 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     }
     
     @Override
+    public void configVisitorRoutine(IElement visitables){
+//        // When This is createed, 
+//        // They know how many floors are in the building
+//        System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
+//        // They know the order they want to visit the floors
+//        visitorAgenda.add(2);       // They begin in Parking Garage 
+//        visitorAgenda.add(1);       //and then they want to visit here
+//        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
+//        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
+//        // begin in visiting state in Parking garage floor 0
+//        state = VISITING;
+//        // this current floor variable might not be needed. instead use array
+//        currentFloor = visitorAgenda.get(myFloorIndex);  // begin in index 0
+//        // tell currentFloor to take ownership of this visitor for this floor
+//        ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
+//        System.out.println("DEBUG: Visitor: configVisRoutine CurrentFloor: " +currentFloor );
+    }  
+    
+    @Override
     public void configVisitorRoutine(){
         // When This is createed, 
-        // They knows how many floors are in the building
-        System.out.println("DEBUG: VsitorShoper MaxFloor = " + maxFloor);
-        //maxFloor = ElevatorBank.GetInstance().getMaxFloor();
-       //this.maxFloor = maxFloorValue;
+        // They know how many floors are in the building
+        System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
         // They know the order they want to visit the floors
-        visitorAgenda.add(0);       // They begin in Parking Garage 
-        visitorAgenda.add(1);       //and then they want to visit here
+        visitorAgenda.add(1);       // They begin on this floor #
+        visitorAgenda.add(2);       //and then they want to visit here
         visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
         visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-        // begin in visiting state in Parking garage floor 0
+        // begin in visiting state 
         state = VISITING;
-        currentFloor = 0;  // They are in the parking garage
-    }                 
+        // visitor gets passed to the first floor in the agenda
+        currentFloor = visitorAgenda.get(myFloorIndex);  // begin in index 0
+        ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
+        System.out.println("DEBUG: Visitor: configVisRoutine CurrentFloor: " + currentFloor );
+    }
+                
+                
+    public void beginAgendaProtocol(){
+        if (state == VISITING){
+            
+        }
+    }
+    
     // randomize the order of floor visit and add it to OrderOfVisits Array
     public int randFloorPicker(int maxFloor){
         int floorFloorToVisit =  rand.nextInt(maxFloor);
@@ -64,6 +94,8 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     
     @Override
     public void visit( Floor floor ) {
+        //place this visitor inside the floor it belongs
+        
         System.out.println(
                 "Visitor:"
                 + this.toString()

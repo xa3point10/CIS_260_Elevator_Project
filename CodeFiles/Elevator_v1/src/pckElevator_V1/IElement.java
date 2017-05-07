@@ -6,12 +6,10 @@ import java.util.Iterator;
 public interface IElement {
     // Elements can accapt & release Visitors
     void accept( IVisitor visitor );
+    //public void accept( IVisitor visitor, int DesiredFloor );
     void release( IVisitor visitor );
     
-    //***************
-    // To: do
-    // Create the callElevatorButton()
-    void callElevatorButton( Floor floor );
+    //public  void elevatorCallButton( IElement floor, IVisitor visitor );
     public int getNumberOfVisitors();
     
     //------------------------------

@@ -23,10 +23,10 @@ public class Elevator implements IElement {
     //***************
     // To: do
     // Create the callElevatorButton()
-    // needs an array list of visitors
-    //private ArrayList< IVisitor> riders = new ArrayList<IVisitor>();
     private ArrayList< IVisitor> riders;
     private int numberOfVisitors = 0;
+    
+    
     //------------------------------
     // constructors
     //------------------------------
@@ -39,14 +39,12 @@ public class Elevator implements IElement {
     //------------------------------
     // operations
     //------------------------------
-    public  void callElevatorButton( Floor floor ){}
-
+    
     @Override
     public void accept(IVisitor visitor) {
         visitor.visit(this);
     }
 
-    // ***** recomended add from class conversation
     @Override
     public void release(IVisitor visitor) {
         // to do: create a check for elevator state
@@ -66,16 +64,33 @@ public class Elevator implements IElement {
                 it.remove();
                 continue;
             }
-            //System.out.println( element );
-//        }
         }
     }
 
+    public void elevatorWakeUp(){
+        // Needs to run a check
+    }
+    
+    public  void elevatorCallButton( IElement floor, IVisitor visitor ){
+        // How do we decide a visitor presses the call Button?
+        //if (visitor == 3 )
+        // Visitor looks at their array
+        // Visitor visits that floor for a call cycle
+        // Next cycle visitor pushes the call button. 
+        // elevator makes it way to called floor
+        // Then there is a hand off from floor to Elevator
+        // the elator gets a +1 in their array
+        // Elevator gets destination floor and proceeds to floor
+    }
+    
+
     public void arrived(int floor) {
-        // needs to be finished
+        // Continued from callButton
+        // check that destination floor = getFloor()
+        // once equal, then handoff release() to floor
+        // floor runs the accept() program
     }
 
-    //@Override
     public void move() {
         int newFloor = this.floor + direction;  //constantly up +1
         if (newFloor >= maxFloor) {
@@ -92,12 +107,12 @@ public class Elevator implements IElement {
     }//move
 
     public String getLabel() {
-        System.out.println("DEBUG: Elevator getLabel: " + label );
+        System.out.println("DEBUG: Elevator: getLabel: " + label );
         return label;
     }
 
     public int getFloor() {
-        System.out.println("DEBUG: Elevator getFloor: " + floor );
+        System.out.println("DEBUG: Elevator: getFloor: " + floor );
         return floor;
     }
         public int getState() {

@@ -17,16 +17,17 @@ public class ScenarioThree implements IScenario{
     
     // operations
     @Override
-    public void setIElementElevator(Elevator elevator){
-            visitables.add(elevator);
-    }
-    @Override
-    public void setIElementFloor(Floor floor){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitables.add(floor);
+    public void setAllIElements(){
+        for (int idxE = 0; idxE <= this.numberOfElevators; ++ idxE){
+        visitables.add(ElevatorBank.GetInstance().getElevator(idxE));
         }
+        for (int idxF = 0; idxF <= this.numberOfFloors; ++ idxF){
+        visitables.add(ElevatorBank.GetInstance().getFloor(idxF));
+        }
+    System.out.println("DEBUG: ScenarioCustom: setAllElements: Visitables size " 
+            + visitables.size() );
     }
-    
+        
     @Override
     public void populateVisitorsArray(){
         for (int idx = 0; idx <= numberOfVisitors -1; ++idx){

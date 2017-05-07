@@ -9,24 +9,50 @@ public class ScenarioCustom implements IScenario{
     private int numberOfFloors = 0;
     private int numberOfElevators = 0;
     private int numberOfVisitors = 0;
-    
-    // constructor
+    // Construct the visitor types!
+    private VisitorShopper shopper = new VisitorShopper(); 
+  
+    //****************************
+    // Constructor
+    //****************************
     public ScenarioCustom() {
-        // no specific constructor instructions
+        this.visitables = new ArrayList<>(); 
+        this.visitors = new ArrayList<>();
     }
     
-     // operations
+    //****************************
+    // operations
+    //****************************
+    @Override
+    public void setIElementElevator(Elevator elevator){
+            visitables.add(elevator);
+    }
+    @Override
+    public void setIElementFloor(Floor floor){
+        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
+            visitables.add(floor);
+        }
+    }
+    
+    @Override
+    public void populateVisitorsArray(){
+        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
+            visitors.add(shopper);              // put in array
+            this.shopper.configVisitorRoutine();// tell to config itself
+        }
+    }
+    
+    @Override
+    public ArrayList< IElement > getVisitables() {  
+        return visitables;
+    }
+    
     @Override
     public int  getNumberOfVisitors(){ return numberOfVisitors;}
     
     @Override
     public void setNumberOfVisitors(int numberOfVisitors) {
         this.numberOfVisitors = numberOfVisitors;
-    }
-    
-    @Override
-    public ArrayList< IElement > getVisitables() {  
-        return visitables;
     }
     
     @Override
@@ -40,6 +66,7 @@ public class ScenarioCustom implements IScenario{
     
     @Override
     public void setNumberOfFloors( int numberOfFloors ){
+        shopper.setMaxFloor(numberOfFloors);
         Elevator.maxFloor = numberOfFloors;
         this.numberOfFloors = numberOfFloors;
     }//setNumberOfFloors

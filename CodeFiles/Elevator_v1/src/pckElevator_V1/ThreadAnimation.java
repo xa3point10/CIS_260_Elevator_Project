@@ -30,9 +30,8 @@ public class ThreadAnimation implements Runnable {
                 ex.printStackTrace();
                 return;
             }
-            //System.out.println( "Thread woke up!" );
             controller.animate();
         }
-    }//run    }// run()
+    }//run    
 
 }// class ThreadAnimation

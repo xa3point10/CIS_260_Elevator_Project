@@ -7,12 +7,14 @@ public class Floor implements IElement {
 
     private String label;
 
-    private ArrayList< IVisitor> floorVisitor = new ArrayList<IVisitor>();
-
+    private ArrayList< IVisitor> floorVisitor;
+    private int numberOfVisitors = 0;
     
     // Constructor ********************
     public Floor ( String label ) {
-        this.label = label;
+        floorVisitor = new ArrayList<IVisitor>();       //added
+        this.numberOfVisitors = floorVisitor.size();    //added
+        this.label = label;   //from original CODE    
     }
     //***************
     // To: do
@@ -49,12 +51,14 @@ public class Floor implements IElement {
 //        }
         }
     }
-      
-    //*************FROM MVC DEMO ***************
+    @Override
+    public int getNumberOfVisitors() {
+        return numberOfVisitors;
+    }
+    //*************FROM ORIGINAl MVC DEMO ***************
     //@Override
-    public String getLabel() {
+    public String getLabel() {  
         return label;
     }
-
     
 }// class Floor

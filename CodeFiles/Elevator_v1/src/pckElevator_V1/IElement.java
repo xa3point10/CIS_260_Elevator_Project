@@ -12,7 +12,7 @@ public interface IElement {
     // To: do
     // Create the callElevatorButton()
     void callElevatorButton( Floor floor );
-
+    public int getNumberOfVisitors();
     
     //------------------------------
     // NEW operations! from Merge File

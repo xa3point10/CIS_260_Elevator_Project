@@ -8,7 +8,7 @@ public class Controller {
     private WindowMainApp window = null;      // need the window
     private boolean isSimulationRunning = false;
     private IScenario myScenario;
-    //private ElevatorBank elevatorBank;  // need elevator bank
+
 
     //constructors
     public Controller() {
@@ -26,20 +26,25 @@ public class Controller {
     
     public void setScenario(int scenarioOption) {
         switch (scenarioOption) {
-            case 0: //customScenario already told myScenario it is a ScenarioCustom!
+            case 0: 
+                //customScenario already told myScenario it is a ScenarioCustom!
                 updateElevatorBankConfig();
+                myScenario.populateVisitorsArray();
                 break;
             case 1:
                 myScenario = new ScenarioOne();   //Needs to be Created
                 updateElevatorBankConfig();
+                myScenario.populateVisitorsArray();
                 break;
             case 2:
                 myScenario = new ScenarioTwo();   //Needs to be Created
                 updateElevatorBankConfig();
+                myScenario.populateVisitorsArray();
                 break;
             case 3:
                 myScenario = new ScenarioThree(); //Needs to be Created
                 updateElevatorBankConfig();
+                myScenario.populateVisitorsArray();
                 break;
         }
     }
@@ -96,5 +101,4 @@ public class Controller {
     public void setWindow(WindowMainApp window) {
         this.window = window;
     }
-
 }//class ControllerDemo

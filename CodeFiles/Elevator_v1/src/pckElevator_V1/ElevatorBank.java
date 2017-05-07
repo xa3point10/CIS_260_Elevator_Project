@@ -10,12 +10,9 @@ public class ElevatorBank {
     private static ElevatorBank mInstance = null;
 
     // data
-    //------------------------------
-    //private IScenario scenario;
-    // getscenario
-    // setScenario  
     private ArrayList< Elevator> elevators;
     private ArrayList< Floor> floors;
+    private int maxFloor;
     //private ArrayList< IVisitor > elevatorRiders;
 
     // constructors
@@ -29,6 +26,7 @@ public class ElevatorBank {
     // operations
     //------------------------------
     public void updateConfiguration(int numberOfFloors, int numberOfElevators /*, int elevatorRiders */) {
+        this.maxFloor = numberOfFloors;
         elevators.clear();  // use Arraylist Clear() method
         floors.clear();     // use Arraylist Clear() method
         // needs visiors   
@@ -60,7 +58,7 @@ public class ElevatorBank {
     }//updateConfiguration
    
     
-    // ************ ELEVATORS ************
+    // ************ VISITORS ************
 //    public IVisitor getElevatorRider(int individualVisitor) {
 //        return elevatorRiders.get(individualVisitor);
 //    }//getElevator
@@ -87,9 +85,13 @@ public class ElevatorBank {
     }//addElevator
 
     // ************ Floors ************
+    public int getMaxFloor() {
+        return maxFloor;
+    }
+
     public Floor getFloor(int floorSeqNumber) {
         return floors.get( floorSeqNumber );
-    }//getFloor
+    } //getFloor
 
     public ArrayList<Floor> getFloors() {
         return floors;

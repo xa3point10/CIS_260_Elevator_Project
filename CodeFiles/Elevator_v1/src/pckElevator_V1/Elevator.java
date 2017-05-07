@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Elevator implements IElement {
-
     // data
     //------------------------------
     public static int maxFloor = 0;
@@ -27,14 +26,14 @@ public class Elevator implements IElement {
     // needs an array list of visitors
     //private ArrayList< IVisitor> riders = new ArrayList<IVisitor>();
     private ArrayList< IVisitor> riders;
-    private int ElevatorRiders = 0;
+    private int numberOfVisitors = 0;
     //------------------------------
     // constructors
     //------------------------------
     public Elevator(String label, int floor, int passengers) {
         this.riders = new ArrayList<IVisitor>();
         this.label = label;
-        this.ElevatorRiders = riders.size();
+        this.numberOfVisitors = riders.size();
     }//Elevator
 
     //------------------------------
@@ -110,11 +109,14 @@ public class Elevator implements IElement {
     }
 
     public int getElevatorRiders() {
-        return ElevatorRiders;
+        return numberOfVisitors;
     }
 
     public void setElevatorRiders(int ElevatorRiders) {
-        this.ElevatorRiders = ElevatorRiders;
+        this.numberOfVisitors = ElevatorRiders;
     }
-    
+    @Override
+    public int getNumberOfVisitors() {
+        return numberOfVisitors;
+    }
 }//class Elevator

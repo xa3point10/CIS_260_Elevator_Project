@@ -6,7 +6,7 @@ public class ScenarioOne implements IScenario {
     // scenario Data // Maybe this shouldnt be in here
     private ArrayList< IElement> visitables; // Added from Visitors DEmo
     private ArrayList< IVisitor> visitors;   // Added from Visitors DEmo
-    
+    private VisitorShopper shopper = new VisitorShopper();
     private int numberOfFloors = 0;     
     private int numberOfElevators = 0;  
     private int numberOfVisitors = 0;
@@ -26,8 +26,8 @@ public class ScenarioOne implements IScenario {
 
     // Constroctor 
     public ScenarioOne() {
-//        this.visitors = new ArrayList<>();
-//        this.visitables = new ArrayList<>();
+        this.visitors = new ArrayList<>();
+        this.visitables = new ArrayList<>();
 //        // pass in the visitable locations 
 //        visitables.add(e1); //creates Elevator 1 
 //        visitables.add(e2); //creates Elevator 2 
@@ -47,8 +47,25 @@ public class ScenarioOne implements IScenario {
 //        );
     }
     
-
     // operations
+    @Override
+    public void setIElementElevator(Elevator elevator){
+            visitables.add(elevator);
+    }
+    @Override
+    public void setIElementFloor(Floor floor){
+        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
+            visitables.add(floor);
+        }
+    }
+    
+    @Override
+    public void populateVisitorsArray(){
+        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
+            visitors.add(shopper);
+        }      
+    }
+
     @Override
     public int  getNumberOfVisitors(){ return numberOfVisitors;}
     

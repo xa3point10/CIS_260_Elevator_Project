@@ -19,32 +19,14 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     private int myFloorIndex = 0;
     private ArrayList<Integer> visitorAgenda;
     private ArrayList<Floor> myFloorHistory;
+    private int nextDesiredFloorIndex = 0;
     
 
     // Constructor
     public VisitorShopper() {
         visitorAgenda = new ArrayList<>();
     }
-    
-    @Override
-    public void configVisitorRoutine(IElement visitables){
-//        // When This is createed, 
-//        // They know how many floors are in the building
-//        System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
-//        // They know the order they want to visit the floors
-//        visitorAgenda.add(2);       // They begin in Parking Garage 
-//        visitorAgenda.add(1);       //and then they want to visit here
-//        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-//        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-//        // begin in visiting state in Parking garage floor 0
-//        state = VISITING;
-//        // this current floor variable might not be needed. instead use array
-//        currentFloor = visitorAgenda.get(myFloorIndex);  // begin in index 0
-//        // tell currentFloor to take ownership of this visitor for this floor
-//        ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
-//        System.out.println("DEBUG: Visitor: configVisRoutine CurrentFloor: " +currentFloor );
-    }  
-    
+        
     @Override
     public void configVisitorRoutine(){
         // When This is createed, 
@@ -53,16 +35,19 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
         // They know the order they want to visit the floors
         visitorAgenda.add(1);       // They begin on this floor #
         visitorAgenda.add(2);       //and then they want to visit here
-        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
+        //visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
+        visitorAgenda.add(0);       // End back in the garage
         // begin in visiting state 
         state = VISITING;
         // visitor gets passed to the first floor in the agenda
         currentFloor = visitorAgenda.get(myFloorIndex);  // begin in index 0
         ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
         System.out.println("DEBUG: Visitor: configVisRoutine CurrentFloor: " + currentFloor );
-    }
-                
+        // Set the next desited floor 
+        if (nextDesiredFloorIndex <= visitorAgenda.size()){
+            ++nextDesiredFloorIndex;
+        }
+    }         
                 
     public void beginAgendaProtocol(){
         if (state == VISITING){
@@ -77,12 +62,17 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     }
 
     // Operations
+    @Override
     public void unboard (Floor floor){          // arrived at floor
         
     }
-    public void arrived (Elevator elevator){    // boarding elevator
-        
+    @Override
+    public void boardElevator (Elevator elevator, Floor floor){          // arrived at floor
+        // this is called if the elvator has arrived to the floor
+        // then this is used to swap from flooor to elevator
+        ElevatorBank.GetInstance().getFloors().get(0).release(this);
     }
+    
 
     public void setState(int state) {
         this.state = state;
@@ -91,7 +81,7 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     public int getState() {
         return this.state;
     }
-    
+/** // void Visit   
     @Override
     public void visit( Floor floor ) {
         //place this visitor inside the floor it belongs
@@ -112,7 +102,8 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
                 + elevator.hashCode()
                 );
     }//visit
-
+*/
+    
     public void setMaxFloor(int maxFloor) {
         this.maxFloor = maxFloor;
     }
@@ -122,5 +113,14 @@ public class VisitorShopper  implements /*extends*/ IVisitor {
     }
     public void setMyFloorLabel(String myFloorLabel) {
         this.myFloorLabel = myFloorLabel;
-    }    
+    }
+    @Override
+    public int getNextDesiredFloorIndex() {
+        return nextDesiredFloorIndex;
+    }
+    @Override
+    public ArrayList<Integer> getVisitorAgenda() {
+        return visitorAgenda;
+    }
+    
 }// class VisitorShopper

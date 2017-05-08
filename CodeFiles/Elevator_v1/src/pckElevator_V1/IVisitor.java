@@ -1,13 +1,16 @@
 package pckElevator_V1;
 
+import java.util.ArrayList;
+
 public interface IVisitor {
     
-    public void visit( Floor floor );
-    public void visit( Elevator elevator );
+    public void unboard (Floor floor);
+    public void boardElevator (Elevator elevator, Floor floor);
     
-    public void configVisitorRoutine(IElement visitables);
+
     public void configVisitorRoutine();
-    public void unboard (Floor floor);          // arrived at floor
-    public void arrived (Elevator elevator);    // boarding elevator
+    public int getNextDesiredFloorIndex();
+    public ArrayList<Integer> getVisitorAgenda();
+
     
 }// interface IVisitor

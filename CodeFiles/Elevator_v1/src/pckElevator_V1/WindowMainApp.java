@@ -448,10 +448,9 @@ public class WindowMainApp extends javax.swing.JFrame {
             // ***** POPULATE: FlOOR collumn ****************
             for (int floorIdx = 0; floorIdx<= floorsArray.size() -1; ++floorIdx){
                 tblSimulation.getModel().setValueAt(
-                    floorsArray.get(floorIdx).getNumberOfVisitors()+
-                     " floor "+ floorIdx +" -> "+floorsArray.get(1).getNumberOfVisitors(),  // what to display
-                    floorIdx/*rowIndex*/,                                           // int Row
-                    controller.getScenario().getNumberOfElevators()     // int col
+                    floorsArray.get(floorIdx).getNumberOfVisitors(),  // what to display
+                    floorIdx/*rowIndex*/,                             // int Row
+                    controller.getScenario().getNumberOfElevators()   // int col
                 );
             }
             // ***** POPULATE: ELEVATOR collumn ****************

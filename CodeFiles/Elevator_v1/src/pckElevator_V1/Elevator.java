@@ -42,7 +42,7 @@ public class Elevator implements IElement {
     
     @Override
     public void accept(IVisitor visitor) {
-        visitor.visit(this);
+        //visitor.visit(this);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Elevator implements IElement {
     
     public  void elevatorCallButton( IElement floor, IVisitor visitor ){
         // How do we decide a visitor presses the call Button?
-        //if (visitor == 3 )
+        //if (visitor. )
         // Visitor looks at their array
         // Visitor visits that floor for a call cycle
         // Next cycle visitor pushes the call button. 

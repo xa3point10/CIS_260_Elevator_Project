@@ -6,7 +6,6 @@ import java.util.Iterator;
 public interface IElement {
     // Elements can accapt & release Visitors
     void accept( IVisitor visitor );
-    //public void accept( IVisitor visitor, int DesiredFloor );
     void release( IVisitor visitor );
     
     //public  void elevatorCallButton( IElement floor, IVisitor visitor );
@@ -19,5 +18,4 @@ public interface IElement {
     //public void move();
     //public int getFloor();
 
-    
 }// interface IElement

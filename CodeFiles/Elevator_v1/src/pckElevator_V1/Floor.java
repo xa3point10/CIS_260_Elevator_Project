@@ -18,9 +18,10 @@ public class Floor implements IElement {
     }
 
     //Operations
-    public  void FloorCallButton( IElement floor, IVisitor visitor ){
+    public  void FloorCallButton(IVisitor visitor ){
         // How do we decide a visitor presses the call Button?
-        //if ()
+        // for this certain visitor
+        //if (floorVisitor.get(0).getNextDesiredFloorIndex() > ElevatorBank.)
         // Visitor looks at their array
         // Visitor visits that floor for a call cycle
         // Next cycle visitor pushes the call button. 

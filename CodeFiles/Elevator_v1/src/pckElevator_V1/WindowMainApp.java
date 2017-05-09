@@ -20,7 +20,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         
         //pre-set the text field with values
         txtFldFloors.setText("5");
-        txtFldElevators.setText("4");
+        txtFldElevators.setText("1");
         txtFldVisitors.setText("3");
         
         this.setTitle("Prject Morpheus Elevator Project");

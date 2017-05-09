@@ -108,18 +108,18 @@ public class Elevator implements IElement {
             System.out.println("DEBUG: elevatorCallRequested(): Hurdle 2 requestedFlloor: CurrentFloor: "+ this.floor);
             int newFloor = this.floor + direction;
             // set the direction of the move()
-            if (newFloor > this.visitList.get(1)) {
-                System.out.println("DEBUG: elevatorCallRequested(): 2a: " + state);
+            if (newFloor > this.visitList.get(1)) {                
                 this.direction = DIRECTIONDOWN;
                 this.state = MOVING;
-            } else if (newFloor < this.visitList.get(1)) {
-                System.out.println("DEBUG: elevatorCallRequested(): 2b : state = "+state);
+                System.out.println("DEBUG: elevatorCallRequested(): 2a: " + state + " Down");
+            } else if (newFloor < this.visitList.get(1)) {                
                 this.direction = DIRECTIONUP;
                 this.state = MOVING;
+                System.out.println("DEBUG: elevatorCallRequested(): 2b : state = "+state + " up");
             } else if (this.floor == this.visitList.get(1)) {
                 this.state = STOP;
                 this.state = ARRIVED;
-                System.out.println("DEBUG: elevatorCallRequested(): 2c : state = "+state);
+                System.out.println("DEBUG: elevatorCallRequested(): 2c : state = "+state + " stop");
                 //arrived();
                 System.out.println("DEBUG: elevatorCallRequested(): state should be stop!!!!!!!!!!!!! state= " + state);
             }
@@ -133,11 +133,11 @@ public class Elevator implements IElement {
         int newFloor = this.floor + direction;  //constantly up +1
         if (newFloor >= maxFloor) {
             this.floor = maxFloor - 1;
-            this.direction = DIRECTIONDOWN;
+            //this.direction = DIRECTIONDOWN;
 
         } else if (newFloor <= minFloor) {
             this.floor = minFloor;
-            this.direction = DIRECTIONUP;
+            //this.direction = DIRECTIONUP;
         } else {
             this.floor = newFloor;
             //arrived();

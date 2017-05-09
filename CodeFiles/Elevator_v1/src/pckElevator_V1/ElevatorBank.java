@@ -18,9 +18,8 @@ public class ElevatorBank {
     // constructors
     //------------------------------
     public ElevatorBank() {
-        elevators = new ArrayList<>();
-        floors = new ArrayList<>();
-        //elevatorRiders = new ArrayList<>();
+        this.elevators = new ArrayList<>();
+        this.floors = new ArrayList<>();
     }//ElevatorBank()
 
     // operations
@@ -34,10 +33,13 @@ public class ElevatorBank {
             Floor floor = null;
             if (idx == 0) {
                 floor = new Floor("P");
+                floor.setThisFloorsNumber(idx);
             } else if (idx == 1) {
                 floor = new Floor("L");
+                floor.setThisFloorsNumber(idx);
             } else {
                 floor = new Floor(Integer.toString(idx));
+                floor.setThisFloorsNumber(idx);
             }
             addFloor(floor);
         }
@@ -49,27 +51,13 @@ public class ElevatorBank {
             //Fill that Elevator object
             elevator = new Elevator(
                     "E"+elevTableLabel,         // Label for each Elevator
-                    idx,  3                      // starting position before move
-                    //elevator.getElevatorRiders() // how many  visitors?   
-            );                    
+                    idx,                        // starting position before move
+                    elevTableLabel// alt label number  
+            );
             addElevator(elevator);
         }
     }//updateConfiguration
-   
-    
-    // ************ VISITORS ************
-//    public IVisitor getElevatorRider(int individualVisitor) {
-//        return elevatorRiders.get(individualVisitor);
-//    }//getElevator
-//    
-//    public ArrayList<IVisitor> getVisitors() {
-//        return elevatorRiders;
-//    }//getElevators
-//    
-//    public void addVisitor(IVisitor visitors) {
-//        elevatorRiders.add(visitors);
-//    }// 
-    
+       
     // ************ ELEVATORS ************
     public Elevator getElevator(int elevatorSeqNumber) {
         return elevators.get(elevatorSeqNumber);

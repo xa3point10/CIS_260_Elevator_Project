@@ -185,8 +185,5 @@ public class Elevator implements IElement {
         this.requestedFloor = requestedFloor;
     }
 
-<<<<<<< HEAD
 }//class Elevator
-=======
-}//class Elevator
->>>>>>> master
+

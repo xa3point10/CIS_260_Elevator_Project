@@ -29,7 +29,11 @@ public class Floor implements IElement {
             System.out.println("DEBUG: FloorCallButton "+thisFloorsNumber+": callElevator =" + boolCallElevator);
             // Check each visitors
             for (int idx = 0; idx <= floorVisitors.size()-1; ++idx) {
+<<<<<<< HEAD
                 // if this visitor's desired floor is not this floor
+=======
+                // if this vibsitor's desired floor is not this floor
+>>>>>>> master
                 if (floorVisitors.get(idx).getNextDesiredFloorIndex() != this.thisFloorsNumber )
                 {
                     // call the elevator and tell the elevator to move to thisFloorsNumber
@@ -105,4 +109,8 @@ public class Floor implements IElement {
         this.boolCallElevator = callElevator;
     }
     
+<<<<<<< HEAD
 }// class Floor
+=======
+}// class Floor
+>>>>>>> master

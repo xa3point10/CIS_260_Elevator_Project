@@ -29,18 +29,27 @@ public class ScenarioOne implements IScenario {
         this.visitors = new ArrayList<>();
         this.visitables = new ArrayList<>();
     }
+    @Override 
+    public void wakeUpScenario() {
+    
+    }
     
     @Override
-    public void setAllIElements(){
-        for (int idxE = 0; idxE <= this.numberOfElevators; ++ idxE){
-        visitables.add(ElevatorBank.GetInstance().getElevator(idxE));
+    public void setAllIElements() {
+        // add all elevators into the array
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            //elevator.move();
+            visitables.add(elevator);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
-        for (int idxF = 0; idxF <= this.numberOfFloors; ++ idxF){
-        visitables.add(ElevatorBank.GetInstance().getFloor(idxF));
+        // add all floors into the array
+        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        for (Floor floor : floors) {
+            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
-    System.out.println("DEBUG: ScenarioCustom: setAllElements: Visitables size " 
-            + visitables.size() );
-    }
+    }// setAllIElements()
      
     @Override
     public void populateVisitorsArray(){

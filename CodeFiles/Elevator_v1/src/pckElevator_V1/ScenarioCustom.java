@@ -24,17 +24,29 @@ public class ScenarioCustom implements IScenario{
     //****************************
     // operations
     //**************************
-   @Override
-    public void setAllIElements(){
-        for (int idxE = 0; idxE <= this.numberOfElevators-1; ++ idxE){
-        this.visitables.add(ElevatorBank.GetInstance().getElevator(idxE));
+    @Override 
+    public void wakeUpScenario() {
+        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
+            visitors.get(idx).wakeUpVisitor();
         }
-        for (int idxF = 0; idxF <= this.numberOfFloors-1; ++ idxF){
-        this.visitables.add(ElevatorBank.GetInstance().getFloor(idxF));
-        }
-    System.out.println("DEBUG: ScenarioCustom: setAllElements: Visitables size " 
-            + visitables.size() );
     }
+            
+    @Override
+    public void setAllIElements() {
+        // add all elevators into the array
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            //elevator.move();
+            visitables.add(elevator);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+        // add all floors into the array
+        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        for (Floor floor : floors) {
+            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+    }// setAllIElements()
     
     @Override
     public void populateVisitorsArray(){
@@ -42,6 +54,7 @@ public class ScenarioCustom implements IScenario{
             visitors.add(shopper);              // put 1 visitor in array
             this.shopper.configVisitorRoutine();// tell to config itself
         }
+        setAllIElements();
     }
     
     @Override

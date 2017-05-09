@@ -10,7 +10,9 @@ public interface IElement {
     
     //public  void elevatorCallButton( IElement floor, IVisitor visitor );
     public int getNumberOfVisitors();
-    
+//    public void setThisFloorsNumber(int thisFloorsNumber);
+//    public void setThisElevatorsNumber(int ThisElevatorsNumber);
+            
     //------------------------------
     // NEW operations! from Merge File
     //--------------b----------------

@@ -8,6 +8,8 @@ public interface IScenario {
     public ArrayList< IElement >  getVisitables();
     public ArrayList< IVisitor >  getVisitors();
     
+
+    public void wakeUpScenario();
     public void setAllIElements();
     public void populateVisitorsArray();
     //******** From Oroginal MVC DEMO ******

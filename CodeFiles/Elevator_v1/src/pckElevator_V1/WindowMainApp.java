@@ -337,7 +337,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         controller.customScenario(          // Fill Custom Settings
             4 /*numberOfFloors*/,
             1 /*numberOfElevators*/,
-            5 /*numberOfVisitors*/);
+            2 /*numberOfVisitors*/);
         controller.setScenario(0);          // set the Custom (0) scenario
         configureBuildingDisplay();         // configure the display table
         update();                           // update table to display scenario
@@ -440,18 +440,19 @@ public class WindowMainApp extends javax.swing.JFrame {
         // Save scenario also calls this to visualize latest config
         ArrayList<Elevator> elevatorsArray = ElevatorBank.GetInstance().getElevators();
         ArrayList<Floor> floorsArray = ElevatorBank.GetInstance().getFloors();
-        //ArrayList<IElement> bldingElements = controller.getScenario().getVisitables();
         int columnIndex = 0; // first elevator shown in the leftmost table column
         for (Elevator elevator : elevatorsArray) {
             // update elevator location:
-            int rowIndex = floorsArray.size() - elevator.getFloor() - 1;  //Index is top down!
+            int rowIndex = floorsArray.size() - elevator.getFloor() - 1; //Index is top down!
+            int tempRowIdx = floorsArray.size()-1; 
             // ***** POPULATE: FlOOR collumn ****************
-            for (int floorIdx = 0; floorIdx<= floorsArray.size() -1; ++floorIdx){
+            for (int flooridx =0; flooridx <= floorsArray.size()-1 ; ++flooridx){
                 tblSimulation.getModel().setValueAt(
-                    floorsArray.get(floorIdx).getNumberOfVisitors(),  // what to display
-                    floorIdx/*rowIndex*/,                             // int Row
-                    controller.getScenario().getNumberOfElevators()   // int col
+                    "[  "+floorsArray.get(flooridx).getNumberOfVisitors()+"  ]",  // what to display
+                    tempRowIdx,//flooridx/*rowIndex*/,                             // int Row
+                    controller.getScenario().getNumberOfElevators()   // int col             
                 );
+                --tempRowIdx;
             }
             // ***** POPULATE: ELEVATOR collumn ****************
             tblSimulation.getModel().setValueAt(

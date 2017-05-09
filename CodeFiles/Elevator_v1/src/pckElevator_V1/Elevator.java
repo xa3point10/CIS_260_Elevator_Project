@@ -117,20 +117,20 @@ public class Elevator implements IElement {
                 this.state = MOVING;
                 System.out.println("DEBUG: elevatorCallRequested(): 2b : state = "+state + " up");
             } else if (this.floor == this.visitList.get(1)) {
-                this.state = STOP;
+                this.direction = STOP;
                 this.state = ARRIVED;
                 System.out.println("DEBUG: elevatorCallRequested(): 2c : state = "+state + " stop");
                 //arrived();
                 System.out.println("DEBUG: elevatorCallRequested(): state should be stop!!!!!!!!!!!!! state= " + state);
             }
-        }
+        }// if
         System.out.println("DEBUG: elevatorCallRequested(): Hurdle 3 on the move()\n");
         move();
     } // elevatorCallRequested()
 
     public void move() {
         // Where should the Elevator move?
-        int newFloor = this.floor + direction;  //constantly up +1
+        int newFloor = this.floor + direction;  
         if (newFloor >= maxFloor) {
             this.floor = maxFloor - 1;
             //this.direction = DIRECTIONDOWN;
@@ -142,6 +142,12 @@ public class Elevator implements IElement {
             this.floor = newFloor;
             //arrived();
         }
+        if ( this.floor == requestedFloor) {           
+            this.direction = STOP;
+            this.state = ARRIVED;
+            System.out.println("DEBUG: elevatorCallRequested(): Hurdle 4 Arrived!\n");
+        }
+            
     }//move
     
     public void arrived() {

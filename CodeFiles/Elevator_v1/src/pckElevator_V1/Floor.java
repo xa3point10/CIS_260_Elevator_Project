@@ -29,7 +29,6 @@ public class Floor implements IElement {
             System.out.println("DEBUG: FloorCallButton "+thisFloorsNumber+": callElevator =" + boolCallElevator);
             // Check each visitors
             for (int idx = 0; idx <= floorVisitors.size()-1; ++idx) {
-
                 // if this vibsitor's desired floor is not this floor
                 if (floorVisitors.get(idx).getNextDesiredFloorIndex() != this.thisFloorsNumber )
                 {

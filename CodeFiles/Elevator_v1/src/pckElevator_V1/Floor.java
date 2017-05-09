@@ -7,47 +7,63 @@ public class Floor implements IElement {
 
     private String label;   // the label This current floor
 
-    private ArrayList< IVisitor> floorVisitor;
+    private ArrayList< IVisitor> floorVisitors;
     private int numberOfVisitors = 0;
+    private int thisFloorsNumber = 0;
+    private Boolean boolCallElevator = false;
     
-    // Constructor ********************
+    // ********************************
+    // Constructor 
+    // ********************************
     public Floor ( String label ) {
         System.out.println("DEBUG: Floor: Constructor: this floor's Label: " + label);
-        floorVisitor = new ArrayList<>();       //added
+        this.floorVisitors = new ArrayList<>();       //added
         this.label = label;   //from original CODE    
     }
-
-    //Operations
-    public  void FloorCallButton(IVisitor visitor ){
-        // How do we decide a visitor presses the call Button?
-        // for this certain visitor
-        //if (floorVisitor.get(0).getNextDesiredFloorIndex() > ElevatorBank.)
-        // Visitor looks at their array
-        // Visitor visits that floor for a call cycle
-        // Next cycle visitor pushes the call button. 
-        // elevator makes it way to called floor
-        // Then there is a hand off from floor to Elevator
-        // the elator gets a +1 in their array
-        // Elevator gets destination floor and proceeds to floor
-    }
+    
+    // ********************************
+    // Operations 
+    public Boolean FloorCallButton(IVisitor visitor ){
+        // If the elevator button is not already called
+        if (boolCallElevator == false){
+            System.out.println("DEBUG: FloorCallButton "+thisFloorsNumber+": callElevator =" + boolCallElevator);
+            // Check each visitors
+            for (int idx = 0; idx <= floorVisitors.size()-1; ++idx) {
+                // if this vibsitor's desired floor is not this floor
+                if (floorVisitors.get(idx).getNextDesiredFloorIndex() != this.thisFloorsNumber )
+                {
+                    // call the elevator and tell the elevator to move to thisFloorsNumber
+                    ElevatorBank.GetInstance().getElevator(0).setRequestedFloor(thisFloorsNumber);
+                    this.boolCallElevator = true;     // Turn on the Call Button
+                    System.out.println("DEBUG: FloorCallButton "+thisFloorsNumber+": callElevator =" + boolCallElevator);
+                }//if
+            }// for
+        }//if 
+        return boolCallElevator;
+    } // FloorCallButton()
     
     @Override
     public void accept( IVisitor visitor) {
         // tell first Elevator to accept this visitor
-        this.floorVisitor.add(visitor);
-        this.numberOfVisitors = floorVisitor.size();
-        System.out.println("DEBUG: Floor: " + label + " accept(): numberOfVisitors: " + numberOfVisitors );
+        this.floorVisitors.add(visitor);
+        this.numberOfVisitors = floorVisitors.size();
+        FloorCallButton(visitor);
+        System.out.println("DEBUG: Floor: F" + label + " accept(): has numberOfVisitors: " + numberOfVisitors );
+        //visitor.
     }
     
-    // ***** recomended add from class conversation
-    public void arrived( int floor ){ 
-        // needs to be finished
+    public IVisitor elevatorIsHere(){
+        // release the first visitor in the array
+        IVisitor tempBoardingParty = floorVisitors.get(0);
+        release(floorVisitors.get(0));
+        return tempBoardingParty;
     }
     
+    // ***** recomended add from class conversation    
     @Override
     public void release(IVisitor visitor) {
         // remembers how to 
-        Iterator<IVisitor> it = floorVisitor.iterator();
+        Iterator<IVisitor> it = floorVisitors.iterator();
         // could be done in a while loop it.hasNext()
         for (; it.hasNext();) {
             IVisitor rider = it.next();
@@ -71,6 +87,22 @@ public class Floor implements IElement {
     //@Override
     public String getLabel() {  
         return label;
+    }
+    
+    public void setThisFloorsNumber(int thisFloorsNumber) {
+        this.thisFloorsNumber = thisFloorsNumber;
+    }
+
+    public int getThisFloorsNumber() {
+        return thisFloorsNumber;
+    }
+
+    public Boolean getBoolCallElevator() {
+        return boolCallElevator;
+    }
+
+    public void setCallElevator(Boolean callElevator) {
+        this.boolCallElevator = callElevator;
     }
     
 }// class Floor

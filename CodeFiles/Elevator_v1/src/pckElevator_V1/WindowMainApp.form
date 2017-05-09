@@ -23,23 +23,15 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>but dim="0">
+  <Layout>
+    <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Component id="jPanellMainView" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Component id="jPanellMainView" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="jPanellMainView" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanellMainView" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -57,22 +49,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jtabSimulation" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
               <Component id="jtabSimulation" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jtabSimulation" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Component id="jtabSimulation" alignment="1" pref="798" max="32767" attributes="0"/>
               <Component id="jtabSimulation" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -220,10 +201,6 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="71" max="32767" attributes="0"/>
-                              <EmptySpace pref="338" max="32767" attributes="0"/>
-                              <Component id="btnSaveScenario_1" min="-2" pref="453" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                               <EmptySpace pref="54" max="32767" attributes="0"/>
                               <Component id="btnSaveScenario_1" min="-2" pref="597" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -266,9 +243,6 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType" min="-2" pref="28" max="-2" attributes="0"/>
-                              <EmptySpace pref="378" max="32767" attributes="0"/>
-                              <EmptySpace pref="602" max="32767" attributes="0"/>
-                              <EmptySpace pref="391" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtFldFloors" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -377,8 +351,6 @@
                                       <Component id="btnSaveScenario_2" min="-2" pref="606" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="72" max="32767" attributes="0"/>
-                              <EmptySpace pref="339" max="32767" attributes="0"/>
                               <EmptySpace pref="41" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -388,8 +360,6 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType2" min="-2" pref="28" max="-2" attributes="0"/>
-                              <EmptySpace pref="378" max="32767" attributes="0"/>
-                              <EmptySpace pref="602" max="32767" attributes="0"/>
                               <EmptySpace pref="391" max="32767" attributes="0"/>
                               <Component id="btnSaveScenario_2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -443,12 +413,6 @@
                               <Component id="lblScenarioType1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="72" max="32767" attributes="0"/>
-                              <EmptySpace pref="339" max="32767" attributes="0"/>
-                              <Component id="btnSaveScenario_3" min="-2" pref="452" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -456,8 +420,6 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblScenarioType1" min="-2" pref="28" max="-2" attributes="0"/>
-                              <EmptySpace pref="378" max="32767" attributes="0"/>
-                              <EmptySpace pref="602" max="32767" attributes="0"/>
                               <EmptySpace pref="391" max="32767" attributes="0"/>
                               <Component id="btnSaveScenario_3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -502,17 +464,6 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jScrollPane2" min="-2" pref="571" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="btnRunSimulation" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                                  <Component id="btnStopSimulation" min="-2" pref="146" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -523,7 +474,6 @@
                                   <Component id="btnStopSimulation" min="-2" pref="189" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="68" max="32767" attributes="0"/>
                           <EmptySpace pref="49" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -532,20 +482,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="310" max="-2" attributes="0"/>
-                          <EmptySpace pref="75" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnRunSimulation" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnStopSimulation" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="560" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnRunSimulation" min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="btnStopSimulation" min="-2" pref="63" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="348" max="-2" attributes="0"/>
                           <EmptySpace pref="52" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">

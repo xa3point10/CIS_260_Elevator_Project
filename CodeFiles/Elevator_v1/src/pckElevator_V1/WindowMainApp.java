@@ -407,15 +407,9 @@ public class WindowMainApp extends javax.swing.JFrame {
             
         }
         controller.customScenario(          // Fill Custom Settings
-<<<<<<< HEAD
-            4 /*numberOfFloors*/,
-            1 /*numberOfElevators*/,
-            2 /*numberOfVisitors*/);
-=======
             floors /*numberOfFloors*/,
             elevators /*numberOfElevators*/,
             visitors /*numberOfVisitors*/);
->>>>>>> master
         controller.setScenario(0);          // set the Custom (0) scenario
         configureBuildingDisplay();         // configure the display table
         update();                           // update table to display scenario

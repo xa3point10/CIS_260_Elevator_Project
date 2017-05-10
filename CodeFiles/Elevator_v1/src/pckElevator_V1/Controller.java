@@ -66,12 +66,8 @@ public class Controller {
     public void animate() {
         if (isSimulationRunning == false) {return;}
         // update business model
-        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
-        for (Elevator elevator : elevators) {
-            //elevator.move();
-            elevator.elevatorWakeUp();
-            myScenario.wakeUpScenario();
-        }
+        ElevatorBank.GetInstance().animate();
+        myScenario.wakeUpScenario();
         updateWindow();         
     }// animate
 

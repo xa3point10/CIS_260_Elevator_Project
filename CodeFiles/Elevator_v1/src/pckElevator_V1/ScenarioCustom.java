@@ -9,8 +9,7 @@ public class ScenarioCustom implements IScenario{
     private int numberOfFloors = 0;
     private int numberOfElevators = 0;
     private int numberOfVisitors = 0;
-    // Construct the visitor types!
-    private VisitorShopper shopper = new VisitorShopper(); 
+    private VisitorShopper shopper; //new VisitorShopper(); 
     //private VisitorShopper worker = new VisitorWorker();  // doesnt exist yet
     
     //****************************
@@ -26,11 +25,13 @@ public class ScenarioCustom implements IScenario{
     //**************************
     @Override 
     public void wakeUpScenario() {
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitors.get(idx).wakeUpVisitor();
+        for (int idx = 0; idx <= numberOfVisitors-1; ++idx){
+            this.visitors.get(idx).wakeUpVisitor();
+            //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario(): Stepped OVer" + idx);
         }
+        //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario() \tEXIT!");       
     }
-            
+    
     @Override
     public void setAllIElements() {
         // add all elevators into the array
@@ -46,15 +47,19 @@ public class ScenarioCustom implements IScenario{
             visitables.add(floor);
             System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
+        
     }// setAllIElements()
     
     @Override
     public void populateVisitorsArray(){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitors.add(shopper);              // put 1 visitor in array
-            this.shopper.configVisitorRoutine();// tell to config itself
-        }
         setAllIElements();
+        for (int idx = 0; idx < numberOfVisitors; ++idx){
+            this.shopper = new VisitorShopper();     // create unique visitors
+            this.shopper.setMaxFloor(numberOfFloors);
+            this.shopper.configVisitorRoutine();// tell to config itself
+            this.visitors.add(shopper);         // add to thisVisitors Array
+            this.shopper.setBldElements(this.visitables);   //pass bldElements
+        }
     }
     
     @Override
@@ -81,8 +86,6 @@ public class ScenarioCustom implements IScenario{
     
     @Override
     public void setNumberOfFloors( int numberOfFloors ){
-        shopper.setMaxFloor(numberOfFloors);    // tell shoper how many floors
-        //worker.setMaxFloor(numberOfFloors);     // tell worker how many floors
         Elevator.maxFloor = numberOfFloors;     // tell Elevator how many floors
         this.numberOfFloors = numberOfFloors;   // tell this Scenario how many floors
     }//setNumberOfFloors

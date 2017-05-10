@@ -4,7 +4,8 @@ import java.util.Iterator;
 
 
 public interface IElement {
-    // Elements can accapt & release Visitors
+    // Elements can accapt & release Visitors 
+    public void accept( ArrayList<IVisitor> boardingParty);
     void accept( IVisitor visitor );
     void release( IVisitor visitor );
     

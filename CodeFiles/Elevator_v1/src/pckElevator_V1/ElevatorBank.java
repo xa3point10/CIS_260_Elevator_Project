@@ -10,20 +10,32 @@ public class ElevatorBank {
     private static ElevatorBank mInstance = null;
 
     // data
+    private ArrayList< Integer> floorDispatchList;
     private ArrayList< Elevator> elevators;
     private ArrayList< Floor> floors;
     private int maxFloor;
-    //private ArrayList< IVisitor > elevatorRiders;
-
+    
+    // ------------------------------
     // constructors
-    //------------------------------
+    // ------------------------------
     public ElevatorBank() {
+        this.floorDispatchList = new ArrayList<>();
+        this.floorDispatchList.add(-1);
         this.elevators = new ArrayList<>();
         this.floors = new ArrayList<>();
     }//ElevatorBank()
-
+    
+    // ------------------------------
     // operations
     //------------------------------
+    public void animate(){
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            System.out.println(">>Controller: Floor call list Size!= "+ floorDispatchList.size() );
+            elevator.elevatorWakeUp();      
+        }
+    }// animate()
+    
     public void updateConfiguration(int numberOfFloors, int numberOfElevators ) {
         this.maxFloor = numberOfFloors;
         elevators.clear();  // use Arraylist Clear() method
@@ -50,9 +62,9 @@ public class ElevatorBank {
             elevTableLabel += idx;
             //Fill that Elevator object
             elevator = new Elevator(
-                    "E"+elevTableLabel,         // Label for each Elevator
-                    idx,                        // starting position before move
-                    elevTableLabel// alt label number  
+                    "E"+elevTableLabel,       // Label for each Elevator
+                    0,                        // starting position before move
+                    elevTableLabel  // alt label number  
             );
             addElevator(elevator);
         }
@@ -99,4 +111,13 @@ public class ElevatorBank {
 
         return mInstance;
     }//GetInstance
+
+    public ArrayList<Integer> getFloorDispatchList() {
+        return this.floorDispatchList;
+    }
+
+    public void setFloorDispatchList(ArrayList<Integer> floorCalls) {
+        this.floorDispatchList = floorCalls;
+    }
+    
 }//class ElevatorBank

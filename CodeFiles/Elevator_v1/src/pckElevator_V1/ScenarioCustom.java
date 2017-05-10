@@ -9,8 +9,7 @@ public class ScenarioCustom implements IScenario{
     private int numberOfFloors = 0;
     private int numberOfElevators = 0;
     private int numberOfVisitors = 0;
-    // Construct the visitor types!
-    private VisitorShopper shopper = new VisitorShopper(); 
+    private VisitorShopper shopper; //new VisitorShopper(); 
     //private VisitorShopper worker = new VisitorWorker();  // doesnt exist yet
     
     //****************************
@@ -24,23 +23,42 @@ public class ScenarioCustom implements IScenario{
     //****************************
     // operations
     //**************************
-   @Override
-    public void setAllIElements(){
-        for (int idxE = 0; idxE <= this.numberOfElevators-1; ++ idxE){
-        this.visitables.add(ElevatorBank.GetInstance().getElevator(idxE));
+    @Override 
+    public void wakeUpScenario() {
+        for (int idx = 0; idx <= numberOfVisitors-1; ++idx){
+            this.visitors.get(idx).wakeUpVisitor();
+            //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario(): Stepped OVer" + idx);
         }
-        for (int idxF = 0; idxF <= this.numberOfFloors-1; ++ idxF){
-        this.visitables.add(ElevatorBank.GetInstance().getFloor(idxF));
-        }
-    System.out.println("DEBUG: ScenarioCustom: setAllElements: Visitables size " 
-            + visitables.size() );
+        //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario() \tEXIT!");       
     }
     
     @Override
+    public void setAllIElements() {
+        // add all elevators into the array
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            //elevator.move();
+            visitables.add(elevator);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+        // add all floors into the array
+        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        for (Floor floor : floors) {
+            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+        
+    }// setAllIElements()
+    
+    @Override
     public void populateVisitorsArray(){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitors.add(shopper);              // put 1 visitor in array
+        setAllIElements();
+        for (int idx = 0; idx < numberOfVisitors; ++idx){
+            this.shopper = new VisitorShopper();     // create unique visitors
+            this.shopper.setMaxFloor(numberOfFloors);
             this.shopper.configVisitorRoutine();// tell to config itself
+            this.visitors.add(shopper);         // add to thisVisitors Array
+            this.shopper.setBldElements(this.visitables);   //pass bldElements
         }
     }
     
@@ -68,8 +86,6 @@ public class ScenarioCustom implements IScenario{
     
     @Override
     public void setNumberOfFloors( int numberOfFloors ){
-        shopper.setMaxFloor(numberOfFloors);    // tell shoper how many floors
-        //worker.setMaxFloor(numberOfFloors);     // tell worker how many floors
         Elevator.maxFloor = numberOfFloors;     // tell Elevator how many floors
         this.numberOfFloors = numberOfFloors;   // tell this Scenario how many floors
     }//setNumberOfFloors

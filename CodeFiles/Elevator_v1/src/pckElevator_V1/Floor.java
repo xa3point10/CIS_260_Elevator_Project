@@ -8,6 +8,7 @@ public class Floor implements IElement {
     private String label;   // the label This current floor
 
     private ArrayList< IVisitor> floorVisitors;
+    private ArrayList< IVisitor> tempBoardingParty;
     private int numberOfVisitors = 0;
     private int thisFloorsNumber = 0;
     private Boolean boolCallElevator = false;
@@ -18,7 +19,8 @@ public class Floor implements IElement {
     public Floor ( String label ) {
         System.out.println("DEBUG: Floor: Constructor: this floor's Label: " + label);
         this.floorVisitors = new ArrayList<>();       //added
-        this.label = label;   //from original CODE    
+        this.tempBoardingParty = new ArrayList<>(); 
+        this.label = label;   //from original CODE
     }
     
     // ********************************
@@ -41,25 +43,50 @@ public class Floor implements IElement {
         }//if 
         return boolCallElevator;
     } // FloorCallButton()
-    
+    @Override
+    public void accept( ArrayList<IVisitor> boardingParty) {
+        // tell first Elevator to accept this visitor
+        this.floorVisitors = boardingParty;
+        numberOfVisitors = this.floorVisitors.size();
+        System.out.println("DEBUG: Elevator: " + label + " accept(): riders: " + floorVisitors.toString() );
+//        for (int idx = 0; idx <= riders.size(); ++idx){
+//            riders.get(idx).configVisitorRoutine();
+//        }
+    }
     @Override
     public void accept( IVisitor visitor) {
         // tell first Elevator to accept this visitor
         this.floorVisitors.add(visitor);
+        System.out.println("\nDEBUG visitors= " + floorVisitors );
         this.numberOfVisitors = floorVisitors.size();
         FloorCallButton(visitor);
         System.out.println("DEBUG: Floor: F" + label + " accept(): has numberOfVisitors: " + numberOfVisitors );
         //visitor.
     }
+
     
-    public IVisitor elevatorIsHere(){
-        // release the first visitor in the array
-        IVisitor tempBoardingParty = floorVisitors.get(0);
-        release(floorVisitors.get(0));
-        return tempBoardingParty;
-    }
+    public void elevatorIsHere(int elevatorNum){
+        // change each visitors state to riding!
+        int RIDING = 2;
+        for (Iterator<IVisitor> visitors = floorVisitors.iterator(); visitors.hasNext();) {
+            IVisitor person = visitors.next();
+            person.setState(RIDING);
+        }
+        Elevator  elevator = ElevatorBank.GetInstance().getElevator(elevatorNum);
+        elevator.accept(this.floorVisitors);
+        
+        this.floorVisitors.clear();
+//        for(int idx = 0; idx <= 1/*floorVisitors.size()*/ -1; ++idx){
+//            System.out.println("Boarding passss = " +(idx+1));
+//            release(floorVisitors.get(idx));
+//        }    
+        // Turn off the floor light
+        boolCallElevator = false;
+    } // elevatorIsHere()
     
-    // ***** recomended add from class conversation    
+    public IVisitor boardThisVisitor(IVisitor visitor){
+        return visitor;
+    }  
     @Override
     public void release(IVisitor visitor) {
         // remembers how to 
@@ -69,19 +96,21 @@ public class Floor implements IElement {
             IVisitor rider = it.next();
             // compare both
             if (rider == visitor) {
-                //System.out.print( "DEBUG: removing " );
-                //System.out.println( element );
                 // iterator allows stable loop while removing the content
+                //boardThisVisitor(visitor);
                 it.remove();
                 continue;
             }
-            //System.out.println( element );
 //        }
         }
     }
+    public void updateNumberOfFloorVisitors(){
+        floorVisitors.clear();
+        numberOfVisitors = floorVisitors.size();
+    }
     @Override
     public int getNumberOfVisitors() {
-        return numberOfVisitors;
+        return numberOfVisitors = floorVisitors.size() ;
     }
     //*************FROM ORIGINAl MVC DEMO ***************
     //@Override
@@ -104,5 +133,6 @@ public class Floor implements IElement {
     public void setCallElevator(Boolean callElevator) {
         this.boolCallElevator = callElevator;
     }
-    
+
 }// class Floor
+

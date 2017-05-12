@@ -22,9 +22,10 @@ public class VisitorShopper implements /*extends*/ IVisitor {
     private String myFloorLabel;   // from ElevatorBank updateConfiguration()
     private int maxFloor;
     private int currentFloor;
-    //private int myFloorIndex = 0;
-    private int desiredFloorIndex = 0;
+    //private int myFloorIndex = 0;             // candidate for delete
+    //private int desiredFloorIndex = 0;        // candidate for delete
     private int nextDesiredFloor;
+    private boolean tempDoorCheck = false;
 
     private ArrayList<Integer> visitorAgenda;
     private ArrayList<IElement> bldElements;    // candidate for delete
@@ -55,10 +56,10 @@ public class VisitorShopper implements /*extends*/ IVisitor {
         // begin in visiting state 
         state = VISITING;
         // visitor gets passed to the first floor in the agenda
-        currentFloor = visitorAgenda.get(desiredFloorIndex);  // begin in index 0
+        currentFloor = visitorAgenda.get(CURRENTFLOORidx);  // begin in index 0
         System.out.println("DEBUG: thisVisitors\t\t CurrentFloor = " + currentFloor);
-        this.desiredFloorIndex++; // increment the index
-        this.nextDesiredFloor = visitorAgenda.get(desiredFloorIndex);
+        //this.desiredFloorIndex++; // increment the index
+        this.nextDesiredFloor = visitorAgenda.get(NEXTDESIREDFLOORidx);
         // begin this visitors life on the first currentFloor
         ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
         state = VISITING;
@@ -124,26 +125,30 @@ public class VisitorShopper implements /*extends*/ IVisitor {
     }// beginAgendaProtocol();
 
     public void calling(ArrayList<Elevator> elevators, ArrayList<Floor> floors) {
-        System.out.println("DEBUG: Visitor: calling()A***************  is calling on " + currentFloor+"& nowchecking each elevator");
+        System.out.println("DEBUG: Visitor: calling()A***************  is calling on " + currentFloor+"& nowchecking each elevator,nextDesiredFloor= "+nextDesiredFloor+"NEXTDESIRED FLOOR INDEX ="+ NEXTDESIREDFLOORidx);
         for (Elevator elevator : elevators) {
             System.out.println("DEBUG: Visitor: calling()B********************************* Elevator Doors are = " + elevator.getDoorsAreOpen());
             if ((elevator.getDoorsAreOpen() == true) && (elevator.getFloor() == currentFloor)) {
+                tempDoorCheck = true;   // update the temp door check
                 elevator.accept(this);
                 System.out.println("DEBUG: Visitor calling()C: this visitor was accepted by elevator" + elevator.getLabel() + " + nextDesiredFloor =" + nextDesiredFloor);
                 elevator.setRequestedFloor(nextDesiredFloor);// tell elevator nextdesiredFloor
-                elevator.setState(3/*DEPARTING*/);
+                // give this elevator the next floor
+                elevator.setRequestedFloor(nextDesiredFloor);
+                elevator.setState(3);   // set Elevator state = DEPARTING(3)
             }
         }
         for (Floor floor : floors) {
-            if (floor.getThisFloorsNumber() == currentFloor) {
+            if ((floor.getThisFloorsNumber() == currentFloor) && (tempDoorCheck == true)) {
                 floor.release(this);
                 System.out.println("DEBUG: Visitor: calling()D:" + floor.getBoolCallElevator().toString());
                 //floor.setCallElevator(true);
                  this.state = RIDING;     // update the state 
-                // Tell the nextDesiredFloor to turn on it's call light
+                // Give the Destination Floor = nextDesiredFloor to turn on it's call light
                 //ElevatorBank.GetInstance().getFloor(nextDesiredFloor-1).setCallElevator(Boolean.TRUE);
             }
         }
+        tempDoorCheck = false;  // This visitor is done checking DoorCheck
         System.out.println("DEBUG: Visitor: calling()END********************************* EXIT with  State = " + this.state);
     }
 
@@ -258,7 +263,7 @@ public class VisitorShopper implements /*extends*/ IVisitor {
 
     @Override
     public int getNextDesiredFloorIndex() {
-        return desiredFloorIndex;
+        return NEXTDESIREDFLOORidx;
     }
 
     @Override

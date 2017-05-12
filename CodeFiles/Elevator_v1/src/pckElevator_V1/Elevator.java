@@ -38,6 +38,8 @@ public class Elevator implements IElement {
     private Boolean doorsAreOpen = false;
     private int tempEBCallListIdx = 0;
     private int tempEBindexListSize = 0;
+    private Boolean callLightPickup = false;
+    private int callLightFloor;
 
     //------------------------------
     // constructors
@@ -81,6 +83,10 @@ public class Elevator implements IElement {
             arrived();
         }
         if (this.state == DEPARTING) {
+            if (callLightPickup == true){
+                visitList.remove(tempEBCallListIdx);
+                
+            }
             System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\t");
             System.out.print("DEBUG: ELEVATOR switchstatement: STATE = Departing, visitList size = " + visitList.size() + " destination ALL floors = ");
             for (int idx = 0; idx <= visitList.size() - 1; ++idx) {
@@ -89,7 +95,7 @@ public class Elevator implements IElement {
             System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\t");
             visitList.remove(tempEBCallListIdx);    // remove old destination
             System.out.println("DEBUG: ELEVATOR switchstatement: STATE = DEPARTING, visitList size = [" + visitList.size() + " element 0 = " + visitList.get(0).toString());
-            visitList.add(requestedFloor); // add new destimation
+            visitList.add(requestedFloor); // add new destination
             System.out.println("DEBUG: ELEVATOR switchstatement: STATE = DEPARTING, visitList size = [" + visitList.size() + " adjusted] element 1 for next desiredFloor  = " + visitList.get(1));
             System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\n\n\n");
             setMoveDirection();
@@ -121,9 +127,11 @@ public class Elevator implements IElement {
                 // check if this floor is already on the list
                 if (!elevatorBankCallList.contains(idx)) {
                     // starting position for the reference list
+                    this.callLightPickup = true;// this is CallLight Pickup
+                    this.callLightFloor = idx;
                     this.visitList.add(idx);                // for this elevator
                     this.elevatorBankCallList.add(idx);     // for the ElevatorBank 
-                    this.tempEBCallListIdx = elevatorBankCallList.size() - 1;
+                    this.tempEBCallListIdx = elevatorBankCallList.size() - 1; // update the EBDispatchlist Index
                     this.tempEBindexListSize = elevatorBankCallList.size(); //for the EB
                     state = MOVING;         //chenge elevator to moving
                     ElevatorBank.GetInstance().setFloorDispatchList(elevatorBankCallList); //update ElevatorBank

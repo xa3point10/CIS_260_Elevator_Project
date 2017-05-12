@@ -8,7 +8,9 @@ public interface IVisitor {
     public void unboard (Floor floor);
     public void boardElevator (Elevator elevator, Floor floor);
     
+
     public void setFloorInt(int floorNumber);
+    public void setCurrentFloor(int floorNumber);
     public void setState(int state);
     public void configVisitorRoutine();
     public int getNextDesiredFloorIndex();

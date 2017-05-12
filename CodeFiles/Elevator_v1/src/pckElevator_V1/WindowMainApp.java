@@ -20,7 +20,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         
         //pre-set the text field with values
         txtFldFloors.setText("5");
-        txtFldElevators.setText("1");
+        txtFldElevators.setText("3");
         txtFldVisitors.setText("3");
         
         
@@ -212,6 +212,12 @@ public class WindowMainApp extends javax.swing.JFrame {
         btnSaveScenario_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveScenario_1ActionPerformed(evt);
+            }
+        });
+
+        txtFldElevators.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFldElevatorsActionPerformed(evt);
             }
         });
 
@@ -424,6 +430,10 @@ public class WindowMainApp extends javax.swing.JFrame {
         txtFldFloors.setText("");
         txtFldVisitors.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtFldElevatorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldElevatorsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFldElevatorsActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

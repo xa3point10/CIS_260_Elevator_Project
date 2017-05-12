@@ -66,6 +66,8 @@ public class Controller {
     public void animate() {
         if (isSimulationRunning == false) {return;}
         // update business model
+        System.out.println("\n******\t******\t******\t******\t******\t******\t******\t******\t******\t******\t******\t******");
+        System.out.println("\t\t\tDEBUG: Controller: NEW cycle \n******\t******\t******\t******\t******\t******\t******\t******\t******\t******\t******\t******\n");
         ElevatorBank.GetInstance().animate();
         myScenario.wakeUpScenario();
         updateWindow();         

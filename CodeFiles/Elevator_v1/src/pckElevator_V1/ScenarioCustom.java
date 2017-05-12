@@ -27,9 +27,7 @@ public class ScenarioCustom implements IScenario{
     public void wakeUpScenario() {
         for (int idx = 0; idx <= numberOfVisitors-1; ++idx){
             this.visitors.get(idx).wakeUpVisitor();
-            //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario(): Stepped OVer" + idx);
         }
-        //System.out.println("DEBUG:*******\t*****myScenario.wakeUpScenario() \tEXIT!");       
     }
     
     @Override

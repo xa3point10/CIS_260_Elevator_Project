@@ -23,6 +23,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         txtFldElevators.setText("1");
         txtFldVisitors.setText("3");
         
+        
         this.setTitle("Prject Morpheus Elevator Project");
     }
 
@@ -44,6 +45,12 @@ public class WindowMainApp extends javax.swing.JFrame {
         jlblProjectName3 = new javax.swing.JLabel();
         jlblProjectName4 = new javax.swing.JLabel();
         jtabSelectScenario = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        javax.swing.JLabel lblScenarioType2 = new javax.swing.JLabel();
+        btnSaveScenario_2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        javax.swing.JLabel lblScenarioType1 = new javax.swing.JLabel();
+        btnSaveScenario_3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel lblScenarioType = new javax.swing.JLabel();
         btnSaveScenario_1 = new javax.swing.JButton();
@@ -54,12 +61,6 @@ public class WindowMainApp extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        javax.swing.JLabel lblScenarioType2 = new javax.swing.JLabel();
-        btnSaveScenario_2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        javax.swing.JLabel lblScenarioType1 = new javax.swing.JLabel();
-        btnSaveScenario_3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSimulation = new javax.swing.JTable();
@@ -110,7 +111,7 @@ public class WindowMainApp extends javax.swing.JFrame {
                         .addGroup(jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jlblProjectName1)
                             .addComponent(jlblProjectName))))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jpnlWelcomePanelLayout.setVerticalGroup(
             jpnlWelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +132,78 @@ public class WindowMainApp extends javax.swing.JFrame {
         jtabSimulation.addTab("Welcome!", jpnlWelcomePanel);
 
         jtabSelectScenario.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+
+        lblScenarioType2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        lblScenarioType2.setText("Scenario 1:   Default Scenario ");
+
+        btnSaveScenario_2.setText("Select Scenario");
+        btnSaveScenario_2.setFocusable(false);
+        btnSaveScenario_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveScenario_2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblScenarioType2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnSaveScenario_2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblScenarioType2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
+                .addComponent(btnSaveScenario_2)
+                .addGap(100, 100, 100))
+        );
+
+        jtabSelectScenario.addTab("Top Down", jPanel4);
+
+        lblScenarioType1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        lblScenarioType1.setText("Scenario 2:   Single Visitor");
+
+        btnSaveScenario_3.setText("Select Scenario");
+        btnSaveScenario_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveScenario_3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addComponent(btnSaveScenario_3, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblScenarioType1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblScenarioType1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
+                .addComponent(btnSaveScenario_3)
+                .addGap(100, 100, 100))
+        );
+
+        jtabSelectScenario.addTab("Single", jPanel3);
 
         lblScenarioType.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         lblScenarioType.setText("Scenario:   Custom Scenario ");
@@ -163,7 +236,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -216,78 +289,6 @@ public class WindowMainApp extends javax.swing.JFrame {
 
         jtabSelectScenario.addTab("Custom", jPanel2);
 
-        lblScenarioType2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        lblScenarioType2.setText("Scenario 1:   Default Scenario ");
-
-        btnSaveScenario_2.setText("Select Scenario");
-        btnSaveScenario_2.setFocusable(false);
-        btnSaveScenario_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveScenario_2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblScenarioType2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnSaveScenario_2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblScenarioType2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
-                .addComponent(btnSaveScenario_2)
-                .addGap(100, 100, 100))
-        );
-
-        jtabSelectScenario.addTab("Top Down", jPanel4);
-
-        lblScenarioType1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        lblScenarioType1.setText("Scenario 2:   Single Visitor");
-
-        btnSaveScenario_3.setText("Select Scenario");
-        btnSaveScenario_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveScenario_3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(btnSaveScenario_3, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblScenarioType1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblScenarioType1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
-                .addComponent(btnSaveScenario_3)
-                .addGap(100, 100, 100))
-        );
-
-        jtabSelectScenario.addTab("Single", jPanel3);
-
         jtabSimulation.addTab("1. Choose Scenario", jtabSelectScenario);
 
         tblSimulation.setModel(new javax.swing.table.DefaultTableModel(
@@ -330,7 +331,7 @@ public class WindowMainApp extends javax.swing.JFrame {
                         .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +351,9 @@ public class WindowMainApp extends javax.swing.JFrame {
         jPanellMainView.setLayout(jPanellMainViewLayout);
         jPanellMainViewLayout.setHorizontalGroup(
             jPanellMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtabSimulation)
+            .addGroup(jPanellMainViewLayout.createSequentialGroup()
+                .addComponent(jtabSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 99, Short.MAX_VALUE))
         );
         jPanellMainViewLayout.setVerticalGroup(
             jPanellMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

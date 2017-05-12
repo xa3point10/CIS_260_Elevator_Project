@@ -16,17 +16,29 @@ public class ScenarioThree implements IScenario{
     public ScenarioThree() {}
     
     // operations
-    @Override
-    public void setIElementElevator(Elevator elevator){
-            visitables.add(elevator);
-    }
-    @Override
-    public void setIElementFloor(Floor floor){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitables.add(floor);
-        }
+    @Override 
+    public void wakeUpScenario() {
+    
     }
     
+    @Override
+    public void setAllIElements() {
+        // add all elevators into the array
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            //elevator.move();
+            visitables.add(elevator);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+        // add all floors into the array
+        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        for (Floor floor : floors) {
+            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+
+    }// setAllIElements()
+        
     @Override
     public void populateVisitorsArray(){
         for (int idx = 0; idx <= numberOfVisitors -1; ++idx){

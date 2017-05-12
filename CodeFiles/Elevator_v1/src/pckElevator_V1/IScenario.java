@@ -7,9 +7,10 @@ public interface IScenario {
     // the Visitable glocations
     public ArrayList< IElement >  getVisitables();
     public ArrayList< IVisitor >  getVisitors();
+    
 
-    public void setIElementElevator(Elevator elevator);
-    public void setIElementFloor(Floor floor);
+    public void wakeUpScenario();
+    public void setAllIElements();
     public void populateVisitorsArray();
     //******** From Oroginal MVC DEMO ******
     public int  getNumberOfVisitors();

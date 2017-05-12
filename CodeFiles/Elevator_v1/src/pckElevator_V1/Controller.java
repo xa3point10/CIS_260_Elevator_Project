@@ -8,6 +8,7 @@ public class Controller {
     private WindowMainApp window = null;      // need the window
     private boolean isSimulationRunning = false;
     private IScenario myScenario;
+    private ArrayList< Integer > floorCalls;
 
 
     //constructors
@@ -16,6 +17,7 @@ public class Controller {
 
     // Set the Custom Scenario and if is used, called bellow
     public void customScenario(int numberOfFloors, int numberOfElevators, int numberOfVisitors) {
+        this.floorCalls = new ArrayList<>();
         // tell myScenario it will be ScenarioCustom()!
         myScenario = new ScenarioCustom();
         myScenario.setNumberOfElevators(numberOfElevators);
@@ -40,6 +42,7 @@ public class Controller {
                 myScenario = new ScenarioTwo();   //Needs to be Created
                 updateElevatorBankConfig();
                 myScenario.populateVisitorsArray();
+                
                 break;
             case 3:
                 myScenario = new ScenarioThree(); //Needs to be Created
@@ -52,9 +55,8 @@ public class Controller {
     public void updateElevatorBankConfig() {
     ElevatorBank.GetInstance().updateConfiguration(
                         myScenario.getNumberOfFloors(),
-                        myScenario.getNumberOfElevators() /*,
-                        myScenario.getNumberOfVisitors()*/
-                );
+                        myScenario.getNumberOfElevators() );
+    // update the Scenario IElements array
     }
 
     public IScenario getScenario() {
@@ -64,10 +66,8 @@ public class Controller {
     public void animate() {
         if (isSimulationRunning == false) {return;}
         // update business model
-        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
-        for (Elevator elevator : elevators) {
-            elevator.move();
-        }
+        ElevatorBank.GetInstance().animate();
+        myScenario.wakeUpScenario();
         updateWindow();         
     }// animate
 

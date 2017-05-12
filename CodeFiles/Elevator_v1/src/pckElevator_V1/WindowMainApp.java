@@ -6,6 +6,7 @@ import javax.swing.JTextArea;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class WindowMainApp extends javax.swing.JFrame {
 
@@ -16,7 +17,13 @@ public class WindowMainApp extends javax.swing.JFrame {
     public WindowMainApp(Controller controller) {
         this.controller = controller;
         initComponents();  // This is Created from the Design Window
-       this.setTitle("Prject Morpheus Elevator Project");
+        
+        //pre-set the text field with values
+        txtFldFloors.setText("5");
+        txtFldElevators.setText("1");
+        txtFldVisitors.setText("3");
+        
+        this.setTitle("Prject Morpheus Elevator Project");
     }
 
     /**
@@ -40,6 +47,13 @@ public class WindowMainApp extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel lblScenarioType = new javax.swing.JLabel();
         btnSaveScenario_1 = new javax.swing.JButton();
+        txtFldFloors = new javax.swing.JTextField();
+        txtFldElevators = new javax.swing.JTextField();
+        txtFldVisitors = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         javax.swing.JLabel lblScenarioType2 = new javax.swing.JLabel();
         btnSaveScenario_2 = new javax.swing.JButton();
@@ -128,25 +142,74 @@ public class WindowMainApp extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Number of floors:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Number of elevators:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Numbers of visitors:");
+
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblScenarioType)
-                .addContainerGap(482, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblScenarioType))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnClear)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFldFloors, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFldVisitors, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFldElevators, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblScenarioType, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFldFloors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFldElevators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFldVisitors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(27, 27, 27)
+                .addComponent(btnClear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                 .addComponent(btnSaveScenario_1)
                 .addGap(100, 100, 100))
         );
@@ -334,15 +397,30 @@ public class WindowMainApp extends javax.swing.JFrame {
 
     private void btnSaveScenario_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveScenario_1ActionPerformed
         // This needs custom coding of input from user
+        int floors = 0, elevators = 0,visitors = 0;
+        try{
+            floors = Integer.parseInt(txtFldFloors.getText());
+            elevators = Integer.parseInt(txtFldElevators.getText());
+            visitors = Integer.parseInt(txtFldVisitors.getText());
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(this,"Number format Error " + nfe.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+            
+        }
         controller.customScenario(          // Fill Custom Settings
-            9 /*numberOfFloors*/,
-            1 /*numberOfElevators*/,
-            7 /*numberOfVisitors*/);
+            floors /*numberOfFloors*/,
+            elevators /*numberOfElevators*/,
+            visitors /*numberOfVisitors*/);
         controller.setScenario(0);          // set the Custom (0) scenario
         configureBuildingDisplay();         // configure the display table
         update();                           // update table to display scenario
         jtabSimulation.setSelectedIndex(2); // Go-to Simlation tab view
     }//GEN-LAST:event_btnSaveScenario_1ActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtFldElevators.setText("");
+        txtFldFloors.setText("");
+        txtFldVisitors.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -440,32 +518,35 @@ public class WindowMainApp extends javax.swing.JFrame {
         // Save scenario also calls this to visualize latest config
         ArrayList<Elevator> elevatorsArray = ElevatorBank.GetInstance().getElevators();
         ArrayList<Floor> floorsArray = ElevatorBank.GetInstance().getFloors();
-        ArrayList<IElement> bldingElements = controller.getScenario().getVisitables();;
-        int totalBldVisitors = controller.getScenario().getNumberOfVisitors();
-        //IElement bldingElements = controller.getScenario().getVisitables();
         int columnIndex = 0; // first elevator shown in the leftmost table column
         for (Elevator elevator : elevatorsArray) {
             // update elevator location:
-            int rowIndex = floorsArray.size() - elevator.getFloor() - 1;  //Index is top down!
-            //int visitorIndex = vistorsArray.size();
+            int rowIndex = floorsArray.size() - elevator.getFloor() - 1; //Index is top down!
+            int tempRowIdx = floorsArray.size()-1; 
             // ***** POPULATE: FlOOR collumn ****************
-            tblSimulation.getModel().setValueAt(
-                totalBldVisitors + " DEBUG Visitors " + controller.getScenario().getVisitors().size(),         // What it reads onscreen
-                rowIndex,                                           // int Row
-                controller.getScenario().getNumberOfElevators()     // int col
-            );
+            for (int flooridx =0; flooridx <= floorsArray.size()-1 ; ++flooridx){
+                tblSimulation.getModel().setValueAt(
+                    "[  "+floorsArray.get(flooridx).getNumberOfVisitors()+"  ]",  // what to display
+                    tempRowIdx,//flooridx/*rowIndex*/,                             // int Row
+                    controller.getScenario().getNumberOfElevators()   // int col             
+                );
+                --tempRowIdx;
+            }
             // ***** POPULATE: ELEVATOR collumn ****************
             tblSimulation.getModel().setValueAt(
                 elevator.getLabel() + ": " + elevator.getElevatorRiders(), // Elevator Name + # of Riders
-                rowIndex, 
-                columnIndex
+                rowIndex,                                           // int row
+                columnIndex                                         // int col
             );
             // clear all locations:
             for (int idx = 0; idx < floorsArray.size(); ++idx) {
                 if (idx != rowIndex) {
-                    tblSimulation.getModel().setValueAt(
+                    tblSimulation.getModel().setValueAt(        // clear elevator
                             null/*content*/, idx, columnIndex
                     );
+//                    tblSimulation.getModel().setValueAt(        //clear floor
+//                            null/*content*/, idx, controller.getScenario().getNumberOfElevators()
+//                    );
                 }
             }
             ++columnIndex; // next elevator shown in the next table column
@@ -473,11 +554,15 @@ public class WindowMainApp extends javax.swing.JFrame {
     }//update
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRunSimulation;
     private javax.swing.JButton btnSaveScenario_1;
     private javax.swing.JButton btnSaveScenario_2;
     private javax.swing.JButton btnSaveScenario_3;
     private javax.swing.JButton btnStopSimulation;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -492,6 +577,10 @@ public class WindowMainApp extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jtabSelectScenario;
     private javax.swing.JTabbedPane jtabSimulation;
     private javax.swing.JTable tblSimulation;
+    private javax.swing.JTextField txtFldElevators;
+    private javax.swing.JTextField txtFldFloors;
+    private javax.swing.JTextField txtFldVisitors;
     // End of variables declaration//GEN-END:variables
 
 }
+

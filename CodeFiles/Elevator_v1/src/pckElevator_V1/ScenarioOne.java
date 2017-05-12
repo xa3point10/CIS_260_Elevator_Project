@@ -28,37 +28,29 @@ public class ScenarioOne implements IScenario {
     public ScenarioOne() {
         this.visitors = new ArrayList<>();
         this.visitables = new ArrayList<>();
-//        // pass in the visitable locations 
-//        visitables.add(e1); //creates Elevator 1 
-//        visitables.add(e2); //creates Elevator 2 
-//        visitables.add(b1); //creates Floor 1 
-//        visitables.add(f1); //creates Floor 1 
-//        visitables.add(f2); //creates Floor 2 
-//        visitables.add(f3); //creates Floor 3 
-//
-//        // pass in the visitors to Arraylist 
-//        visitors.add(employee);
-//        visitors.add(guest);
-//        visitors.add(Ixe);
-//        getVisitables();
-//        getVisitors();
-//    ElevatorBank.GetInstance().updateConfiguration(
-//               getNumberOfFloors(), getNumberOfElevators(), getNumberOfVisitors()
-//        );
+    }
+    @Override 
+    public void wakeUpScenario() {
+    
     }
     
-    // operations
     @Override
-    public void setIElementElevator(Elevator elevator){
+    public void setAllIElements() {
+        // add all elevators into the array
+        ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
+        for (Elevator elevator : elevators) {
+            //elevator.move();
             visitables.add(elevator);
-    }
-    @Override
-    public void setIElementFloor(Floor floor){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
-    }
-    
+        // add all floors into the array
+        ArrayList<Floor> floors = ElevatorBank.GetInstance().getFloors();
+        for (Floor floor : floors) {
+            visitables.add(floor);
+            System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
+        }
+    }// setAllIElements()
+     
     @Override
     public void populateVisitorsArray(){
         for (int idx = 0; idx <= numberOfVisitors -1; ++idx){

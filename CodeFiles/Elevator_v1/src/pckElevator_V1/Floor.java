@@ -81,6 +81,7 @@ public class Floor implements IElement {
     }  
     @Override
     public void release(IVisitor visitor) {
+        System.out.println("DEBUG: Floor: "+this.getLabel()+" releasing visitor: "+visitor.toString());
         // remembers how to 
         Iterator<IVisitor> it = floorVisitors.iterator();
         // could be done in a while loop it.hasNext()

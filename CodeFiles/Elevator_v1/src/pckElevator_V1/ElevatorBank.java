@@ -20,7 +20,7 @@ public class ElevatorBank {
     // ------------------------------
     public ElevatorBank() {
         this.floorDispatchList = new ArrayList<>();
-        this.floorDispatchList.add(-1);
+        this.floorDispatchList.add(null);
         this.elevators = new ArrayList<>();
         this.floors = new ArrayList<>();
     }//ElevatorBank()
@@ -31,10 +31,15 @@ public class ElevatorBank {
     public void animate(){
         ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
         for (Elevator elevator : elevators) {
-            System.out.println(">>Controller: Floor call list Size!= "+ floorDispatchList.size() );
+            System.out.println("\n>>[ElevatorBANK] NEW cycle -> "+elevator.getLabel()+", [ElevatorBank] floorDispatchList holds ["+ floorDispatchList.size()+"] elements" );
             elevator.elevatorWakeUp();      
         }
     }// animate()
+    public void updateFloorDispatchList(int tempEBindexListSize){
+        int indexSize = tempEBindexListSize-1;
+        // remove index-1 from the list
+        floorDispatchList.remove(indexSize);
+    }// updateFloorDispatchList()
     
     public void updateConfiguration(int numberOfFloors, int numberOfElevators ) {
         this.maxFloor = numberOfFloors;

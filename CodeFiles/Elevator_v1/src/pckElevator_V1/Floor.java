@@ -12,6 +12,8 @@ public class Floor implements IElement {
     private int numberOfVisitors = 0;
     private int thisFloorsNumber = 0;
     private Boolean boolCallElevator = false;
+    //private IVisitor tempBoardingIndividual;
+    //private IVisitor boardingIndividual;
     
     // ********************************
     // Constructor 
@@ -28,7 +30,7 @@ public class Floor implements IElement {
     public Boolean FloorCallButton(IVisitor visitor ){
         // If the elevator button is not already called
         if (boolCallElevator == false){
-            System.out.println("DEBUG: FloorCallButton "+thisFloorsNumber+": callElevator =" + boolCallElevator);
+            System.out.println("DEBUG: FloorCallButton on floor "+thisFloorsNumber+": callElevator =" + boolCallElevator);
             // Check each visitors
             for (int idx = 0; idx <= floorVisitors.size()-1; ++idx) {
                 // if this vibsitor's desired floor is not this floor
@@ -43,28 +45,18 @@ public class Floor implements IElement {
         }//if 
         return boolCallElevator;
     } // FloorCallButton()
-    @Override
-    public void accept( ArrayList<IVisitor> boardingParty) {
-        // tell first Elevator to accept this visitor
-        this.floorVisitors = boardingParty;
-        numberOfVisitors = this.floorVisitors.size();
-        System.out.println("DEBUG: Elevator: " + label + " accept(): riders: " + floorVisitors.toString() );
-//        for (int idx = 0; idx <= riders.size(); ++idx){
-//            riders.get(idx).configVisitorRoutine();
-//        }
-    }
+
     @Override
     public void accept( IVisitor visitor) {
         // tell first Elevator to accept this visitor
+        //visitor.setFloorInt(thisFloorsNumber);
+        visitor.setCurrentFloor(thisFloorsNumber);
+        
         this.floorVisitors.add(visitor);
         System.out.println("\nDEBUG visitors= " + floorVisitors );
         this.numberOfVisitors = floorVisitors.size();
-        FloorCallButton(visitor);
         System.out.println("DEBUG: Floor: F" + label + " accept(): has numberOfVisitors: " + numberOfVisitors );
-        //visitor.
     }
-
-    
     public void elevatorIsHere(int elevatorNum){
         // change each visitors state to riding!
         int RIDING = 2;
@@ -72,8 +64,8 @@ public class Floor implements IElement {
             IVisitor person = visitors.next();
             person.setState(RIDING);
         }
-        Elevator  elevator = ElevatorBank.GetInstance().getElevator(elevatorNum);
-        elevator.accept(this.floorVisitors);
+        //Elevator  elevator = ElevatorBank.GetInstance().getElevator(elevatorNum);
+        //elevator.accept(this.floorVisitors);
         
         this.floorVisitors.clear();
 //        for(int idx = 0; idx <= 1/*floorVisitors.size()*/ -1; ++idx){
@@ -132,6 +124,7 @@ public class Floor implements IElement {
 
     public void setCallElevator(Boolean callElevator) {
         this.boolCallElevator = callElevator;
+        System.out.println("DEBUG: FLoor: setCallElevator(): was called and set to "+ boolCallElevator.toString());
     }
 
 }// class Floor

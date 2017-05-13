@@ -3,35 +3,34 @@ package pckElevator_V1;
 import java.util.ArrayList;
 
 public class ScenarioOne implements IScenario {
-    // scenario Data // Maybe this shouldnt be in here
-    private ArrayList< IElement> visitables; // Added from Visitors DEmo
-    private ArrayList< IVisitor> visitors;   // Added from Visitors DEmo
-    private VisitorShopper shopper = new VisitorShopper();
-    private int numberOfFloors = 0;     
-    private int numberOfElevators = 0;  
-    private int numberOfVisitors = 0;
+    private ArrayList< IElement> visitables;    // Added
+    private ArrayList< IVisitor> visitors;      // Added
     
-
-//    private Elevator e1 = new Elevator();
-//    private Elevator e2 = new Elevator();
-//    private Floor b1 = new Floor();
-//    private Floor f1 = new Floor();
-//    private Floor f2 = new Floor();
-//    private Floor f3 = new Floor();
-
-    // Construct the visitor types 
-//    private VisitorEmployee employee = new VisitorEmployee();
-//    private VisitorGuest guest = new VisitorGuest();
-//    private Visitor_Ixe Ixe = new Visitor_Ixe();
-
-    // Constroctor 
+    private int numberOfFloors ;
+    private int numberOfElevators;
+    private int numberOfVisitors;
+    private VisitorShopper shopper;         // on? include in populateVisitorsArray()
+    private VisitorTopDown topDownVisitor;  // on? include in populateVisitorsArray()
+    
+    //****************************
+    // Constructor
+    //****************************
     public ScenarioOne() {
+        this.visitables = new ArrayList<>(); 
         this.visitors = new ArrayList<>();
-        this.visitables = new ArrayList<>();
+        this.numberOfFloors = 8;        // hardset numberOfFloors!
+        this.numberOfElevators = 1;     // hardset numberOfElevators!
+        this.numberOfVisitors = 1;      // hardset numberOfVisitors!
     }
+
+    //****************************
+    // operations
+    //**************************
     @Override 
     public void wakeUpScenario() {
-    
+        for (int idx = 0; idx <= numberOfVisitors-1; ++idx){
+            this.visitors.get(idx).wakeUpVisitor();
+        }
     }
     
     @Override
@@ -39,7 +38,6 @@ public class ScenarioOne implements IScenario {
         // add all elevators into the array
         ArrayList<Elevator> elevators = ElevatorBank.GetInstance().getElevators();
         for (Elevator elevator : elevators) {
-            //elevator.move();
             visitables.add(elevator);
             System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
@@ -49,15 +47,26 @@ public class ScenarioOne implements IScenario {
             visitables.add(floor);
             System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
+        
     }// setAllIElements()
-     
+    
     @Override
     public void populateVisitorsArray(){
-        for (int idx = 0; idx <= numberOfVisitors -1; ++idx){
-            visitors.add(shopper);
-        }      
+        setAllIElements();
+        for (int idx = 0; idx < numberOfVisitors; ++idx){
+            this.topDownVisitor = new VisitorTopDown();     // create unique visitors
+            this.topDownVisitor.setMaxFloor(numberOfFloors);
+            this.topDownVisitor.configVisitorRoutine();// tell to config itself
+            this.visitors.add(topDownVisitor);         // add to thisVisitors Array
+            this.topDownVisitor.setBldElements(this.visitables);   //pass bldElements
+        }
     }
-
+    
+    @Override
+    public ArrayList< IElement > getVisitables() {  
+        return visitables;
+    }
+    
     @Override
     public int  getNumberOfVisitors(){ return numberOfVisitors;}
     
@@ -67,30 +76,22 @@ public class ScenarioOne implements IScenario {
     }
     
     @Override
-    public ArrayList< IElement > getVisitables() {  
-        return visitables;
-    }
-    
-    @Override
     public ArrayList< IVisitor >  getVisitors(){ return visitors;}
 
     //********** FROM ORGINAL DEMO **************
     @Override
-    public int getNumberOfFloors()
-    {
+    public int getNumberOfFloors(){
         return numberOfFloors;
     }//getNumberOfFloors
     
     @Override
-    public void setNumberOfFloors( int numberOfFloors )
-    {
-        Elevator.maxFloor = numberOfFloors;
-        this.numberOfFloors = numberOfFloors;
+    public void setNumberOfFloors( int numberOfFloors ){
+        Elevator.maxFloor = numberOfFloors;     // tell Elevator how many floors
+        this.numberOfFloors = numberOfFloors;   // tell this Scenario how many floors
     }//setNumberOfFloors
     
     @Override
-    public int getNumberOfElevators()
-    {
+    public int getNumberOfElevators() {
         return numberOfElevators;
     }//getNumberOfElevators
 
@@ -98,5 +99,5 @@ public class ScenarioOne implements IScenario {
     public void setNumberOfElevators( int numberOfElevators ) {
         this.numberOfElevators = numberOfElevators;
     }//setNumberOfElevators
-    
-}// class ScenarioOne
+        
+}// class ScenarioOne 

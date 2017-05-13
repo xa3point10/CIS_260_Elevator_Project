@@ -8,7 +8,7 @@ public class Controller {
     private WindowMainApp window = null;      // need the window
     private boolean isSimulationRunning = false;
     private IScenario myScenario;
-    private ArrayList< Integer > floorCalls;
+    //private ArrayList< Integer > floorCalls;
 
 
     //constructors
@@ -17,7 +17,7 @@ public class Controller {
 
     // Set the Custom Scenario and if is used, called bellow
     public void customScenario(int numberOfFloors, int numberOfElevators, int numberOfVisitors) {
-        this.floorCalls = new ArrayList<>();
+        //this.floorCalls = new ArrayList<>();
         // tell myScenario it will be ScenarioCustom()!
         myScenario = new ScenarioCustom();
         myScenario.setNumberOfElevators(numberOfElevators);

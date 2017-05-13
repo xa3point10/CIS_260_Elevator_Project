@@ -3,27 +3,33 @@ package pckElevator_V1;
 import java.util.ArrayList;
 
 public class ScenarioTwo implements IScenario {
-
-    // scenario Data // Maybe this shouldnt be in here
-    private ArrayList< IElement> visitables; // Added from Visitors DEmo
-    private ArrayList< IVisitor> visitors;   // Added from Visitors DEmo
-    private VisitorShopper shopper = new VisitorShopper();
-    private int numberOfFloors = 0;
-    private int numberOfElevators = 0;
-    private int numberOfVisitors = 0;
-
-    // Constroctor 
+    private ArrayList< IElement> visitables;    // Added
+    private ArrayList< IVisitor> visitors;      // Added
+    
+    private int numberOfFloors = 8;
+    private int numberOfElevators = 1;
+    private int numberOfVisitors = 1;
+    private VisitorShopper shopper; //new VisitorShopper(); 
+    //private VisitorShopper worker = new VisitorWorker();  // doesnt exist yet
+    
+    //****************************
+    // Constructor
+    //****************************
     public ScenarioTwo() {
-        this.visitables = new ArrayList<>();
+        this.visitables = new ArrayList<>(); 
         this.visitors = new ArrayList<>();
     }
 
+    //****************************
     // operations
-    @Override
+    //**************************
+    @Override 
     public void wakeUpScenario() {
-        //visitors.wakeUp();
+        for (int idx = 0; idx <= numberOfVisitors-1; ++idx){
+            this.visitors.get(idx).wakeUpVisitor();
+        }
     }
-
+    
     @Override
     public void setAllIElements() {
         // add all elevators into the array
@@ -39,56 +45,59 @@ public class ScenarioTwo implements IScenario {
             visitables.add(floor);
             System.out.println("DEBUG: Scenario: SetAllElements(): Visitables size = "+visitables.size());
         }
+        
     }// setAllIElements()
-
+    
     @Override
-    public void populateVisitorsArray() {
-        for (int idx = 0; idx <= numberOfVisitors - 1; ++idx) {
-            visitors.add(shopper);
+    public void populateVisitorsArray(){
+        setAllIElements();
+        for (int idx = 0; idx < numberOfVisitors; ++idx){
+            this.shopper = new VisitorShopper();     // create unique visitors
+            this.shopper.setMaxFloor(numberOfFloors);
+            this.shopper.configVisitorRoutine();// tell to config itself
+            this.visitors.add(shopper);         // add to thisVisitors Array
+            this.shopper.setBldElements(this.visitables);   //pass bldElements
         }
     }
-
+    
     @Override
-    public int getNumberOfVisitors() {
-        return numberOfVisitors;
+    public ArrayList< IElement > getVisitables() {  
+        return visitables;
     }
-
+    
+    @Override
+    public int  getNumberOfVisitors(){ return numberOfVisitors;}
+    
     @Override
     public void setNumberOfVisitors(int numberOfVisitors) {
         this.numberOfVisitors = numberOfVisitors;
     }
-
+    
     @Override
-    public ArrayList< IElement> getVisitables() {
-        return visitables;
-    }
-
-    @Override
-    public ArrayList< IVisitor> getVisitors() {
-        return visitors;
-    }
+    public ArrayList< IVisitor >  getVisitors(){ return visitors;}
 
     //********** FROM ORGINAL DEMO **************
     @Override
-    public int getNumberOfFloors() {
+    public int getNumberOfFloors(){
         return numberOfFloors;
     }//getNumberOfFloors
-
+    
     @Override
-    public void setNumberOfFloors(int numberOfFloors) {
-        Elevator.maxFloor = numberOfFloors;
-        this.numberOfFloors = numberOfFloors;
+    public void setNumberOfFloors( int numberOfFloors ){
+        Elevator.maxFloor = numberOfFloors;     // tell Elevator how many floors
+        this.numberOfFloors = numberOfFloors;   // tell this Scenario how many floors
     }//setNumberOfFloors
-
+    
     @Override
     public int getNumberOfElevators() {
         return numberOfElevators;
     }//getNumberOfElevators
 
     @Override
-    public void setNumberOfElevators(int numberOfElevators) {
+    public void setNumberOfElevators( int numberOfElevators ) {
         this.numberOfElevators = numberOfElevators;
     }//setNumberOfElevators
+        
+}// class ScenarioTwo 
 
-}// class ScenarioTwo
 

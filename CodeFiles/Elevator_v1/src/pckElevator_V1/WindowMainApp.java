@@ -536,7 +536,7 @@ public class WindowMainApp extends javax.swing.JFrame {
             // ***** POPULATE: FlOOR collumn ****************
             for (int flooridx =0; flooridx <= floorsArray.size()-1 ; ++flooridx){
                 tblSimulation.getModel().setValueAt(
-                    "[  "+floorsArray.get(flooridx).getNumberOfVisitors()+"  ]",  // what to display
+                    "[  "+floorsArray.get(flooridx).getNumberOfRiders()+"  ]",  // what to display
                     tempRowIdx,//flooridx/*rowIndex*/,                             // int Row
                     controller.getScenario().getNumberOfElevators()   // int col             
                 );

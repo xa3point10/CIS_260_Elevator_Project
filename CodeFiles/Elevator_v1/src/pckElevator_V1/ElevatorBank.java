@@ -1,6 +1,7 @@
 package pckElevator_V1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ElevatorBank {
 
@@ -10,7 +11,8 @@ public class ElevatorBank {
     private static ElevatorBank mInstance = null;
 
     // data
-    private ArrayList< Integer> floorDispatchList;
+    private ArrayList< Integer > floorDispatchList;
+    private ArrayList< Boolean > ebDispatchList;
     private ArrayList< Elevator> elevators;
     private ArrayList< Floor> floors;
     private int maxFloor;
@@ -20,7 +22,8 @@ public class ElevatorBank {
     // ------------------------------
     public ElevatorBank() {
         this.floorDispatchList = new ArrayList<>();
-        this.floorDispatchList.add(null);
+        //this.ebDispatchList = new ArrayList<>();
+        this.floorDispatchList.add(null); // element 0
         this.elevators = new ArrayList<>();
         this.floors = new ArrayList<>();
     }//ElevatorBank()
@@ -42,6 +45,7 @@ public class ElevatorBank {
     }// updateFloorDispatchList()
     
     public void updateConfiguration(int numberOfFloors, int numberOfElevators ) {
+        this.ebDispatchList = new ArrayList<>(numberOfFloors); // <Boolean>
         this.maxFloor = numberOfFloors;
         elevators.clear();  // use Arraylist Clear() method
         floors.clear();     // use Arraylist Clear() method 
@@ -49,12 +53,15 @@ public class ElevatorBank {
         for (int idx = 0; idx < numberOfFloors; ++idx) {
             Floor floor = null;
             if (idx == 0) {
+                ebDispatchList.add(Boolean.FALSE);
                 floor = new Floor("P");
                 floor.setThisFloorsNumber(idx);
             } else if (idx == 1) {
+                ebDispatchList.add(Boolean.FALSE);
                 floor = new Floor("L");
                 floor.setThisFloorsNumber(idx);
             } else {
+                ebDispatchList.add(Boolean.FALSE);
                 floor = new Floor(Integer.toString(idx));
                 floor.setThisFloorsNumber(idx);
             }
@@ -62,9 +69,11 @@ public class ElevatorBank {
         }
         // populate the elevators and create the lavels
         for (int idx = 0; idx < numberOfElevators; ++idx) {
-            Elevator elevator = null; // construct an Elevator Object
+            floorDispatchList.add(idx+1);   // Element 1, 2, 3, 4, 
+            Elevator elevator = null;           // construct an Elevator Object
             int elevTableLabel = 1;
             elevTableLabel += idx;
+            
             //Fill that Elevator object
             elevator = new Elevator(
                     "E"+elevTableLabel,       // Label for each Elevator
@@ -121,8 +130,14 @@ public class ElevatorBank {
         return this.floorDispatchList;
     }
 
-    public void setFloorDispatchList(ArrayList<Integer> floorCalls) {
-        this.floorDispatchList = floorCalls;
+    public ArrayList<Boolean> getEbDispatchList() {
+        return ebDispatchList;
     }
+
+    public void setEbDispatchList(ArrayList<Boolean> ebDispatchList) {
+        this.ebDispatchList = ebDispatchList;
+    }
+
+    
     
 }//class ElevatorBank

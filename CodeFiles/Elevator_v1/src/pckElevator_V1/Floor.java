@@ -12,8 +12,7 @@ public class Floor implements IElement {
     private int numberOfVisitors = 0;
     private int thisFloorsNumber = 0;
     private Boolean boolCallElevator = false;
-    //private IVisitor tempBoardingIndividual;
-    //private IVisitor boardingIndividual;
+
     
     // ********************************
     // Constructor 
@@ -49,7 +48,6 @@ public class Floor implements IElement {
     @Override
     public void accept( IVisitor visitor) {
         // tell first Elevator to accept this visitor
-        //visitor.setFloorInt(thisFloorsNumber);
         visitor.setCurrentFloor(thisFloorsNumber);
         
         this.floorVisitors.add(visitor);
@@ -64,14 +62,8 @@ public class Floor implements IElement {
             IVisitor person = visitors.next();
             person.setState(RIDING);
         }
-        //Elevator  elevator = ElevatorBank.GetInstance().getElevator(elevatorNum);
-        //elevator.accept(this.floorVisitors);
-        
         this.floorVisitors.clear();
-//        for(int idx = 0; idx <= 1/*floorVisitors.size()*/ -1; ++idx){
-//            System.out.println("Boarding passss = " +(idx+1));
-//            release(floorVisitors.get(idx));
-//        }    
+  
         // Turn off the floor light
         boolCallElevator = false;
     } // elevatorIsHere()
@@ -90,7 +82,6 @@ public class Floor implements IElement {
             // compare both
             if (rider == visitor) {
                 // iterator allows stable loop while removing the content
-                //boardThisVisitor(visitor);
                 it.remove();
                 continue;
             }
@@ -102,7 +93,7 @@ public class Floor implements IElement {
         numberOfVisitors = floorVisitors.size();
     }
     @Override
-    public int getNumberOfVisitors() {
+    public int getNumberOfRiders() {
         return numberOfVisitors = floorVisitors.size() ;
     }
     //*************FROM ORIGINAl MVC DEMO ***************

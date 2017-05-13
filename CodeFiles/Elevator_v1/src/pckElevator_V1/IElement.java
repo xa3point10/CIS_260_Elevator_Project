@@ -9,6 +9,6 @@ public interface IElement {
     void release( IVisitor visitor );
     
 
-    public int getNumberOfVisitors();
+    public int getNumberOfRiders(); // for WindowMainApp
 
 }// interface IElement

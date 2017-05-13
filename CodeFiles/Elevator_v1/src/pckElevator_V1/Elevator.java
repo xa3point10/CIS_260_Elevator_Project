@@ -16,8 +16,6 @@ public class Elevator implements IElement {
     private static final int MOVING = 1;
     private static final int ARRIVED = 2;
     private static final int DEPARTING = 3;
-    private static final int STARTDROPOFF = 4;
-    private static final int DONEDROPOFF = 5;
 
     //  -1..Down +1..Up
     private int direction = STOP;
@@ -27,35 +25,35 @@ public class Elevator implements IElement {
     private int state = 0; // moving up, moving down, standing
     private String label;   // from ElevatorBank updateConfiguration()
 
-    private ArrayList< Integer> elevatorBankCallList = new ArrayList<>();
+    private ArrayList< Boolean > ebDispatchList = new ArrayList<>();
     private ArrayList< IVisitor> riders;
     private ArrayList< IElement> bldElements;
     private ArrayList< Integer> visitList;
-    private int numberOfVisitors = 0;
+    private int numberOfRiders = 0;
     private int requestedFloor;         // passed in by each visitor
     private static int elevatorsNumber;
     private IVisitor tempBoardingIndidual;
     private Boolean doorsAreOpen = false;
-    private int tempEBCallListIdx = 0;
-    private int tempEBindexListSize = 0;
     private Boolean callLightPickup = false;
     private int callLightFloor;
-
+    private Boolean elevatorAvailable = true; // all elevators begin available
+    
     //------------------------------
     // constructors
     //------------------------------
     public Elevator(String label, int floor, int elevatorNumber) {
-        this.elevatorBankCallList = new ArrayList<>();
+        this.ebDispatchList = new ArrayList<>();
         this.riders = new ArrayList<>();
         this.visitList = new ArrayList<>();
         this.bldElements = new ArrayList<>();
         this.visitList.add(-1);
         this.label = label;
-        this.numberOfVisitors = riders.size();
+        this.numberOfRiders = riders.size();
         this.elevatorsNumber = elevatorNumber;
         this.currentFloor = floor;
         this.state = STOP;
-        System.out.println("this elevator's name = " + this.toString());
+        this.elevatorAvailable = true;
+        System.out.println("this elevator's name = " +this.label+" : "+ this.toString());
     }
 
     //------------------------------
@@ -63,79 +61,68 @@ public class Elevator implements IElement {
     //------------------------------
     public void elevatorWakeUp() {
         // update the ElevatorBank list of existing floor visits
-        elevatorBankCallList = ElevatorBank.GetInstance().getFloorDispatchList();
+        ebDispatchList = ElevatorBank.GetInstance().getEbDispatchList();
         // Each cycle through the tread checks for a call
+        System.out.println("Elevator: "+this.getLabel()+" -> validateRequest-> STATE = "+this.state+" floor = "+this.getFloor() + ", riders= " + numberOfRiders
+                +", Confirm! [ElevatorBank] floorDispatchList = "+ebDispatchList.size()+" VisitList = "+visitList.size());
         validateRequest();
     }
 
     public void validateRequest() {
-        // check this elevator. if it's available/ stoped, allow to check calls
-        System.out.println("Elevator: "+this.getLabel()+" -> validateRequest-> STATE = "+this.state+" floor = "+this.getFloor()+", confirm [ElevatorBank] floorDispatchList = " + elevatorBankCallList.size());
-        if (this.state == STOP) {    // check state of this elevator
-            // if this elevator is available/stoped, allow to pick up visitor 
-            elevatorCallRequested();  // this calls the move if asked
-        }
-        if (this.state == MOVING) {
+        // check this elevator. if it's available, allow to check calls
+
+    switch (state) {
+        case STOP:   // = 0   check state of this elevator        
+            System.out.println("DEBUG: ELEVATOR switchstatement: STATE = [ STOP ] , visitList size = " + visitList.size() + ", callLightFloor = "+ callLightFloor);
+            elevatorCloseDoor();
+            // validate: if available check for requests
+            if (checkElevatorAvailability() == true) elevatorCallRequested();  
+            break;
+        
+        case MOVING: 
+            System.out.println("DEBUG: ELEVATOR switchstatement: STATE = [ MOVING ] , visitList size = " + visitList.size() + ", callLightFloor = "+ callLightFloor);
             setMoveDirection();
             move();
-        }
-        if (this.state == ARRIVED) { // arriving for pickup
+            break;
+            
+        case ARRIVED:  // arriving for pickup
+            System.out.println("DEBUG: ELEVATOR switchstatement: STATE = [ ARRIVED] , visitList size = " + visitList.size() + ", callLightFloor = "+ callLightFloor);
             arrived();
-        }
-        if (this.state == DEPARTING) {
-            if (callLightPickup == true){
-                visitList.remove(tempEBCallListIdx);
-                
-            }
-            System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\t");
-            System.out.print("DEBUG: ELEVATOR switchstatement: STATE = Departing, visitList size = " + visitList.size() + " destination ALL floors = ");
-            for (int idx = 0; idx <= visitList.size() - 1; ++idx) {
-                System.out.print(visitList.get(idx).toString() + ", ");
-            }
-            System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\t");
-            visitList.remove(tempEBCallListIdx);    // remove old destination
-            System.out.println("DEBUG: ELEVATOR switchstatement: STATE = DEPARTING, visitList size = [" + visitList.size() + " element 0 = " + visitList.get(0).toString());
-            visitList.add(requestedFloor); // add new destination
-            System.out.println("DEBUG: ELEVATOR switchstatement: STATE = DEPARTING, visitList size = [" + visitList.size() + " adjusted] element 1 for next desiredFloor  = " + visitList.get(1));
-            System.out.println("*******\t*******\t*******\t*******\t*******\t*******\t*******\t*******\n\n\n");
-            setMoveDirection();
+            break;
+            
+        case DEPARTING:
+            this.requestedFloor = visitList.get(1); // next floor 
             elevatorCloseDoor();           // close the foors
+            setMoveDirection();
             this.state = MOVING;
-        }
-        if (this.state == STARTDROPOFF) {// arriving for droppOff
-            this.state = DONEDROPOFF;
-        }
-        if (this.state == DONEDROPOFF) {
-            this.state = STOP;
-            elevatorCloseDoor();
-        }
+            break;
+            
+        }// switch
 
     }// validateRequest()
 
     public void elevatorCallRequested() {
         // update the elvatorBank Tempcall list  
-        System.out.println("DEBUG: Elevator: elevatorCallRequested()this." + label + " inside floorDispatchList size= " + elevatorBankCallList.size());
+        System.out.println("DEBUG: Elevator: elevatorCallRequested()this." + label + " inside ebDispatchList size= " + ebDispatchList.size());
         // Check each floor
         for (int idx = 0; idx < maxFloor; ++idx) {
             System.out.println("DEBUG: elevatorCallRequested(): Hurdle 1:");
-            // if there is a floor that is requesting an elevator
-            int testFloor = ElevatorBank.GetInstance().getFloors().get(idx).getThisFloorsNumber();
+            // check each floor for a call light
             Boolean value = ElevatorBank.GetInstance().getFloors().get(idx).getBoolCallElevator();
-            System.out.println("DEBUG: elevatorCabllRequested(): Hurdle 1a: not added yet floor: " + testFloor + " is " + value);
+            System.out.println("DEBUG: elevatorCabllRequested(): Hurdle 1a: not added yet floor: " + currentFloor + " calling?: " + value +", & ebDispatchList = "+ebDispatchList.get(idx));
             if (ElevatorBank.GetInstance().getFloors().get(idx).getBoolCallElevator()) {  // if TRUE
-                System.out.println("DEBUG: elevatorCallRequested(): Hurdle 1b: checking floor " + testFloor);
+                System.out.println("DEBUG: elevatorCallRequested(): Hurdle 1b: checking floor " + idx );
                 // check if this floor is already on the list
-                if (!elevatorBankCallList.contains(idx)) {
+                if (ebDispatchList.get(idx).equals(Boolean.FALSE)) { // i
                     // starting position for the reference list
-                    this.callLightPickup = true;// this is CallLight Pickup
-                    this.callLightFloor = idx;
+                    this.callLightPickup = true;            // this is CallLight Pickup
+                    this.elevatorAvailable = false; 
+                    this.callLightFloor = idx;    // Replaced if Elevator Visitlist.empty
                     this.visitList.add(idx);                // for this elevator
-                    this.elevatorBankCallList.add(idx);     // for the ElevatorBank 
-                    this.tempEBCallListIdx = elevatorBankCallList.size() - 1; // update the EBDispatchlist Index
-                    this.tempEBindexListSize = elevatorBankCallList.size(); //for the EB
+                    this.ebDispatchList.set(idx, true);     // for ElevatorBank 
                     state = MOVING;         //chenge elevator to moving
-                    ElevatorBank.GetInstance().setFloorDispatchList(elevatorBankCallList); //update ElevatorBank
-                    System.out.println("DEBUG: elevatorCallRequested():****\t\tHurdle 1c: added Floor: " + visitList.get(idx));
+                    ElevatorBank.GetInstance().setEbDispatchList(ebDispatchList); //update ElevatorBank
+                    System.out.println("DEBUG: elevatorCallRequested():****\t\tHurdle 1c: UPDATE visitList.Size() = " + visitList.size());
                     System.out.println("DEBUG: elevatorCallRequested():****\t\tELEVATORBANk dispatchList Size = " + ElevatorBank.GetInstance().getFloorDispatchList().size());
                 }
             }
@@ -144,21 +131,21 @@ public class Elevator implements IElement {
     } // elevatorCallRequested()
 
     public void setMoveDirection() {
-        System.out.println("DEBUG: setMoveDirection(): Hurdle 2 requestedFlloor = CurrentFloor: " + currentFloor);
+        System.out.println("DEBUG: setMoveDirection(): Hurdle 2  CurrentFloor: " + currentFloor);
         if (visitList.get(1) > currentFloor) {
             direction = DIRECTIONUP;
             System.out.println("DEBUG: setMoveDirection(): Hurdle 2 Set the Direction = UP! CurrentFloor: " + currentFloor);
         } else if (visitList.get(1) < currentFloor) {
             direction = DIRECTIONDOWN;
-            System.out.println("DEBUG: setMoveDirection(): Hurdle 2 Set the Direction = UP! CurrentFloor: " + currentFloor);
+            System.out.println("DEBUG: setMoveDirection(): Hurdle 2 Set the Direction = down! CurrentFloor: " + currentFloor);
         } else if (visitList.get(1) == currentFloor) {
             direction = STOP;
-            System.out.println("DEBUG: setMoveDirection(): Hurdle 2 requestedFlloor = CurrentFloor: " + currentFloor);
+            System.out.println("DEBUG: setMoveDirection(): Hurdle 2 Set the Direction = STOP  requestedFlloor = CurrentFloor-> " + currentFloor);
         }
     }// setMoveDirection()
 
     public void move() {
-        System.out.println("DEBUG: move(): Hurdle 3 on the move() to floor:");
+        System.out.println("DEBUG: move(): Hurdle 3 on the move() towards floor direction:" + visitList.get(1));
         if (currentFloor == visitList.get(1)) {
             this.state = ARRIVED;
             this.direction = STOP;
@@ -175,53 +162,84 @@ public class Elevator implements IElement {
             this.direction = DIRECTIONUP;
             System.out.println("DEBUG: move(): DIRECTIONUP down; this.floorInt = minFloor-1 and currentFloor = " + currentFloor);
         } else {
-            this.currentFloor = newFloor; // else it moved up once
-            //this.direction = STOP;
-            //this.state = ARRIVED;
-            // update the floor to shut off it's floor light
+            this.currentFloor = newFloor; // else it moved up once 
             System.out.println("DEBUG: move(): DIRECTIONUP = UP; Hurdle 3 moved to!" + currentFloor + " , state = "+this.state);
         }
     }//move()
 
     public void arrived() {
-        System.out.println("DEBUG: arrived():****\t Elevator " + label + " arrived():******\t on Current floor = [ " + currentFloor +" ] and oppened doors and EBindex = " + tempEBindexListSize);
-        // open the elevator doors
-        elevatorOpenDoor(); 
+        System.out.println("DEBUG: arrived():****\t Elevator " + label + " arrived():******\t on Current floor = [ " + currentFloor +" ] ");
+        // if this dropoff was from a Visitor inside the Elevator, update
+        if (callLightPickup == false){
+            System.out.println("DEBUG: arrived(): (callLightPickup == FALSE) BEGINING");
+            visitList.remove(1);
+            checkElevatorAvailability();
+            state = STOP;
+        }
+        // if this dropoff was from a Floor light, update
+        else if (callLightPickup == true){
+            System.out.println("DEBUG: arrived(): (callLightPickup == true) BEGINING");
+            //int floor = this.getFloor();
+            ebDispatchList.set(currentFloor, false); //update ElevatorBank DispatchList
+            visitList.remove(1); // in this instance, always element 1
+            ElevatorBank.GetInstance().setEbDispatchList(ebDispatchList);
+            callLightPickup = false; // Floor light pickup Complete
+            checkElevatorAvailability(); 
+            System.out.println("DEBUG: arrived(): (callLightPickup == true) END");
+            state = STOP;
+        }  
         // turn off the floor call light
         ElevatorBank.GetInstance().getFloor(currentFloor).setCallElevator(Boolean.FALSE);
-        //ElevatorBank.GetInstance().updateFloorDispatchList(tempEBindexListSize-1); // remove this floor from the list
-////        //this.tempEBCallList.clear();    // update with freshList
-////        System.out.println("DEBUG: arrived():****\t\tELEVATORBANk dispatchList Size 0 = " +tempEBCallList.size());
-////        tempEBCallList = ElevatorBank.GetInstance().getFloorDispatchList();
-////        System.out.println("DEBUG: arrived():****\t\tELEVATORBANk dispatchList tempEBCallListIdx = " +tempEBCallListIdx);
-////        //tempEBCallListIdx;
-////        tempEBCallList.remove( tempEBCallListIdx);
-////        System.out.println("DEBUG: arrived():****\t\tELEVATORBANk dispatchList Size = " +ElevatorBank.GetInstance().getFloorDispatchList().size());
-////        
-////        ElevatorBank.GetInstance().setFloorDispatchList(tempEBCallList); //update ElevatorBank
-////        System.out.println("DEBUG: arrived():****\t\tELEVATORBANk dispatchList Size = " +ElevatorBank.GetInstance().getFloorDispatchList().size());
-////     
-        System.out.println("DEBUG: arrived():****\t Elevator " + label + " arrived():******\t on Current floor = [ " + currentFloor +" ] \t*** END of Arrived()");
-        
+        // open the elevator doors
+        elevatorOpenDoor(); 
+        System.out.println("DEBUG: arrived():****\t Elevator " + label + " arrived():******\t on Current floor = [ " + currentFloor +" ] \t*** END of Arrived()");   
     } // arrived()
 
     @Override
     public void accept(IVisitor boardingParty) {
         // tell first Elevator to accept this visitor
         riders.add(boardingParty);
-        this.numberOfVisitors = riders.size();
+        this.numberOfRiders = riders.size();
         System.out.println("DEBUG: Elevator: " + label + " accept(): riders: " + boardingParty.toString());
 
     }
-
+    
+    public void setRequestedFloor(int requestedFloor) {
+        if (!visitList.contains(requestedFloor)){
+            visitList.add(requestedFloor);
+            this.requestedFloor = requestedFloor;
+            System.out.println("DEBUG:Elevator: setRequestedFloor(): visitlist added: " + requestedFloor);
+        }
+    }
+    
+    public void updateVisitList(int floorToRemove){
+        if (callLightPickup == false){
+            System.out.println("DEBUG: arrived(): (callLightPickup == FALSE) BEGINING");
+            // else update only the local visitList 
+            visitList.remove(floorToRemove);
+            checkElevatorAvailability();
+        }
+    }
+    public void validateCloseDoors(IVisitor visitor){
+        if (currentFloor != visitor.getVisitorAgenda().get(1)){
+            elevatorCloseDoor();
+        }     
+    }
+    
     @Override
     public void release(IVisitor visitor) {
-        //visitor.setFloorInt(currentFloor);
-        visitor.setCurrentFloor(currentFloor);
         riders.remove(visitor);
-        this.numberOfVisitors = riders.size();
+        this.numberOfRiders = riders.size();
     }
-
+    
+    public Boolean checkElevatorAvailability(){
+        if (visitList.size()==1) {      // if no visit list
+            this.elevatorAvailable = true;
+            System.out.println("DEBUG: arrived(): checkElevatorAvailability(): "+this.getLabel()+ " is elevatorAvailable! = " + elevatorAvailable.toString());
+        }
+        return elevatorAvailable;
+    }
+    
     public void elevatorOpenDoor() {
         this.doorsAreOpen = true;     // this elevator opens door
         System.out.println("DEBUG: ElevatorDoors are open!\n");
@@ -233,12 +251,10 @@ public class Elevator implements IElement {
     }
 
     public String getLabel() {
-        //System.out.println("DEBUG: Elevator: getLabel: " + label);
         return label;
     }
 
     public int getFloor() {
-        //System.out.println("DEBUG: Elevator: getFloor: " + floor);
         return currentFloor;
     }
 
@@ -250,25 +266,21 @@ public class Elevator implements IElement {
         Elevator.maxFloor = maxFloor;
     }
 
-    public int getElevatorRiders() {
-        return numberOfVisitors = riders.size();
-    }
-
     public void setElevatorRiders(int ElevatorRiders) {
-        this.numberOfVisitors = ElevatorRiders;
+        this.numberOfRiders = ElevatorRiders;
     }
 
+    public int getElevatorRiders() {
+        return this.numberOfRiders = riders.size();
+    }
+    
     @Override
-    public int getNumberOfVisitors() {
-        return numberOfVisitors;
-    }
-
-    public void setRequestedFloor(int requestedFloor) {
-        this.requestedFloor = requestedFloor;
+    public int getNumberOfRiders() {
+        return this.numberOfRiders = riders.size();
     }
 
     public Boolean getDoorsAreOpen() {
-        return doorsAreOpen;
+        return doorsAreOpen ;
     }
 
     public void setDoorsAreOpen(Boolean doorsAreOpen) {

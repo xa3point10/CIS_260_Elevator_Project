@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public interface IVisitor {
     
     public void wakeUpVisitor();
-    public void unboard (Floor floor);
     public void boardElevator (Elevator elevator, Floor floor);
     
 

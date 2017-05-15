@@ -53,7 +53,7 @@ public class Floor implements IElement {
         visitor.setCurrentFloor(thisFloorsNumber);
         
         this.floorVisitors.add(visitor);
-        System.out.println("\nDEBUG visitors= " + floorVisitors );
+        System.out.println("\nDEBUG visitors= " + floorVisitors.size() );
         this.numberOfVisitors = floorVisitors.size();
         System.out.println("DEBUG: Floor: F" + label + " accept(): has numberOfVisitors: " + numberOfVisitors );
     }

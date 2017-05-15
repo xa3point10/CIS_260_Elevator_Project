@@ -12,6 +12,7 @@ public class Floor implements IElement {
     private int numberOfVisitors = 0;
     private int thisFloorsNumber = 0;
     private Boolean boolCallElevator = false;
+    private int counter = 0;
 
     
     // ********************************
@@ -119,5 +120,15 @@ public class Floor implements IElement {
         System.out.println("DEBUG: FLoor: setCallElevator(): was called and set to "+ boolCallElevator.toString());
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter += counter;
+    }
+
+    
+    
 }// class Floor
 

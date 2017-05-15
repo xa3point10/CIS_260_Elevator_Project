@@ -18,7 +18,7 @@ public class ScenarioOne implements IScenario {
     public ScenarioOne() {
         this.visitables = new ArrayList<>(); 
         this.visitors = new ArrayList<>();
-        this.numberOfFloors = 8;        // hardset numberOfFloors!
+        this.numberOfFloors = 10;        // hardset numberOfFloors!
         this.numberOfElevators = 1;     // hardset numberOfElevators!
         this.numberOfVisitors = 1;      // hardset numberOfVisitors!
     }

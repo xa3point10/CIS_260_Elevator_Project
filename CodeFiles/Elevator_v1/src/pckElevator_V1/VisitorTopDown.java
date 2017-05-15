@@ -51,11 +51,7 @@ public class VisitorTopDown implements IVisitor {
         // They know how many floors are in the building
         System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
         // They know the order they want to visit the floors
-        //topDownAgendaFill();    // populate agenda
-        for (int idx = maxFloor; idx > 0; --idx) {
-            visitorAgenda.add(idx);
-        }
-        visitorAgenda.add(1);       // Example
+        visitorAgenda.add(maxFloor-1);       // Example
         visitorAgenda.add(3);
         //visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
         visitorAgenda.add(0);       // End back in the garage
@@ -68,15 +64,23 @@ public class VisitorTopDown implements IVisitor {
         this.nextDesiredFloor = visitorAgenda.get(NEXTDESIREDFLOORidx);
         // begin this visitors life on the first currentFloor
         ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
-        state = VISITING;
-        //System.out.println("DEBUG: Visitor: configVisRoutine Fully configured on current Floor: " + currentFloor);
-        beginAgendaProtocol();
+          // doesnt know max floor attime of construciton
+          state = VISITING;
+//        //System.out.println("DEBUG: Visitor: configVisRoutine Fully configured on current Floor: " + currentFloor);
+//        beginAgendaProtocol();
     } // configVisitorRoutine()        
 
     public void topDownAgendaFill() {
-        for (int idx = maxFloor; idx >= 1; --idx) {
+        for (int idx = maxFloor-2; idx > 0; --idx) {
             visitorAgenda.add(idx);
         }
+        currentFloor = visitorAgenda.get(CURRENTFLOORidx);  // begin in index 0
+        System.out.println("DEBUG: thisVisitors\t\t CurrentFloor = " + currentFloor);
+        //this.desiredFloorIndex++; // increment the index
+        this.nextDesiredFloor = visitorAgenda.get(NEXTDESIREDFLOORidx);
+        // begin this visitors life on the first currentFloor
+        ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
+        beginAgendaProtocol();
     }// topDownAgendaFill()
 
     @Override

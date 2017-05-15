@@ -50,9 +50,11 @@ public class VisitorShopper implements /*extends*/ IVisitor {
         visitorAgenda.add(1);       // They begin on this floor #
         //visitorAgenda.add(3);       //and then they want to visit here
         //visitorAgenda.add(1);
-        visitorAgenda.add(3);
-        //visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-        //visitorAgenda.add(randFloorPicker(maxFloor));
+        //visitorAgenda.add(3);
+        //visitorAgenda.add(4);
+        //visitorAgenda.add(1);
+        visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
+        visitorAgenda.add(randFloorPicker(maxFloor));
         visitorAgenda.add(0);       // End back in the garage
         // begin in visiting state 
         state = VISITING;

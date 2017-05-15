@@ -81,7 +81,7 @@ public class ScenarioOne implements IScenario {
     //********** FROM ORGINAL DEMO **************
     @Override
     public int getNumberOfFloors(){
-        return numberOfFloors;
+        return this.numberOfFloors;
     }//getNumberOfFloors
     
     @Override
@@ -92,7 +92,7 @@ public class ScenarioOne implements IScenario {
     
     @Override
     public int getNumberOfElevators() {
-        return numberOfElevators;
+        return this.numberOfElevators;
     }//getNumberOfElevators
 
     @Override

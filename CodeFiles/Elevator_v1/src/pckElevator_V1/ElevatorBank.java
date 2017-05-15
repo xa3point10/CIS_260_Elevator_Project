@@ -22,7 +22,7 @@ public class ElevatorBank {
     // ------------------------------
     public ElevatorBank() {
         this.floorDispatchList = new ArrayList<>();
-        //this.ebDispatchList = new ArrayList<>();
+        this.ebDispatchList = new ArrayList<>();
         this.floorDispatchList.add(null); // element 0
         this.elevators = new ArrayList<>();
         this.floors = new ArrayList<>();

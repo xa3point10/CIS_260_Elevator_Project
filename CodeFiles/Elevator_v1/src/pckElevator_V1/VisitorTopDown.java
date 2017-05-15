@@ -51,10 +51,12 @@ public class VisitorTopDown implements IVisitor {
         // They know how many floors are in the building
         System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
         // They know the order they want to visit the floors
-        visitorAgenda.add(maxFloor-1);       // Example
-        visitorAgenda.add(3);
+        //visitorAgenda.add(maxFloor-1);       // Example
+        topDownAgendaFill();
+                
+        //visitorAgenda.add(3);
         //visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
-        visitorAgenda.add(0);       // End back in the garage
+        //visitorAgenda.add(0);       // End back in the garage
         // begin in visiting state 
         state = VISITING;
         // visitor gets passed to the first floor in the agenda
@@ -71,13 +73,14 @@ public class VisitorTopDown implements IVisitor {
     } // configVisitorRoutine()        
 
     public void topDownAgendaFill() {
-        for (int idx = maxFloor-2; idx > 0; --idx) {
+        for (int idx = maxFloor-1; idx >= 0; --idx) {
             visitorAgenda.add(idx);
         }
         currentFloor = visitorAgenda.get(CURRENTFLOORidx);  // begin in index 0
-        System.out.println("DEBUG: thisVisitors\t\t CurrentFloor = " + currentFloor);
-        //this.desiredFloorIndex++; // increment the index
         this.nextDesiredFloor = visitorAgenda.get(NEXTDESIREDFLOORidx);
+        System.out.println("DEBUG: thisVisitors\t\t CurrentFloor = " + currentFloor);
+
+        //this.desiredFloorIndex++; // increment the index
         // begin this visitors life on the first currentFloor
         ElevatorBank.GetInstance().getFloor(currentFloor).accept(this);
         beginAgendaProtocol();

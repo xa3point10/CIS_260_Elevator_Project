@@ -59,7 +59,7 @@ public class ScenarioOne implements IScenario {
             this.topDownVisitor.configVisitorRoutine();// tell to config itself
             this.visitors.add(topDownVisitor);         // add to thisVisitors Array
             this.topDownVisitor.setBldElements(this.visitables);   //pass bldElements
-        }
+        } 
     }
     
     @Override

@@ -10,7 +10,7 @@ public class ScenarioCustom implements IScenario{
     private int numberOfElevators = 0;
     private int numberOfVisitors = 0;
     private VisitorShopper shopper; //new VisitorShopper(); 
-    //private VisitorShopper worker = new VisitorWorker();  // doesnt exist yet
+    private VisitorShopper worker ;//= new VisitorWorker();  // doesnt exist yet
     
     //****************************
     // Constructor

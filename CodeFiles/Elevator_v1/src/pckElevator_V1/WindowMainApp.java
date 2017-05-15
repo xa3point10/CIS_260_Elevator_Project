@@ -8,6 +8,11 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 
 public class WindowMainApp extends javax.swing.JFrame {
@@ -82,6 +87,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         tblSimulation = new javax.swing.JTable();
         btnRunSimulation = new javax.swing.JButton();
         btnStopSimulation = new javax.swing.JButton();
+        btnViewStats = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
@@ -414,7 +420,7 @@ public class WindowMainApp extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblSimulation);
 
-        btnRunSimulation.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnRunSimulation.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnRunSimulation.setText("Run");
         btnRunSimulation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,18 +435,27 @@ public class WindowMainApp extends javax.swing.JFrame {
             }
         });
 
+        btnViewStats.setText("View Statisitcs");
+        btnViewStats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewStatsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnViewStats, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -448,11 +463,12 @@ public class WindowMainApp extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                    .addComponent(btnRunSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStopSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewStats, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         jtabSimulation.addTab("2. Run Simulation", jPanel1);
@@ -485,7 +501,9 @@ public class WindowMainApp extends javax.swing.JFrame {
     private void btnStopSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopSimulationActionPerformed
         // call controller to stop
         controller.stopSimulation();
-      
+        
+        
+        
     }//GEN-LAST:event_btnStopSimulationActionPerformed
 
     private void btnRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunSimulationActionPerformed
@@ -537,6 +555,29 @@ public class WindowMainApp extends javax.swing.JFrame {
     private void txtFldElevatorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldElevatorsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFldElevatorsActionPerformed
+
+    private void btnViewStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStatsActionPerformed
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        ArrayList<Integer> numbers = new ArrayList<>();
+        
+        for(Floor f : ElevatorBank.GetInstance().getFloors()){
+           // dataset.setValue(f.getCounter(), "Marks", "Jimmy");
+            System.out.println(f.getCounter());
+            numbers.add(f.getCounter());
+
+        }
+        for(int i = 0; i < ElevatorBank.GetInstance().getFloors().size();i++){
+            dataset.setValue(numbers.get(i), "visitors number", ElevatorBank.GetInstance().getFloors().get(i).getLabel());
+        }
+        System.err.println(numbers);
+        
+        JFreeChart chart = ChartFactory.createBarChart("Visitors per each floor", "Floors", "Number of Visitors", dataset);
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("Bar Chart",chart);
+        frame.setVisible(true);
+        frame.setSize(450, 350);
+    }//GEN-LAST:event_btnViewStatsActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -678,6 +719,7 @@ public class WindowMainApp extends javax.swing.JFrame {
     private javax.swing.JButton btnSaveScenario_2;
     private javax.swing.JButton btnSaveScenario_3;
     private javax.swing.JButton btnStopSimulation;
+    private javax.swing.JButton btnViewStats;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

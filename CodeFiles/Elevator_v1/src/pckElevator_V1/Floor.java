@@ -50,7 +50,7 @@ public class Floor implements IElement {
     public void accept( IVisitor visitor) {
         // tell first Elevator to accept this visitor
         visitor.setCurrentFloor(thisFloorsNumber);
-        
+        counter++;
         this.floorVisitors.add(visitor);
         System.out.println("\nDEBUG visitors= " + floorVisitors );
         this.numberOfVisitors = floorVisitors.size();

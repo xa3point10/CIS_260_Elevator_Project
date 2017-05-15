@@ -628,12 +628,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane2" min="-2" pref="679" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="btnRunSimulation" min="-2" pref="469" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnStopSimulation" min="-2" pref="189" max="-2" attributes="0"/>
+                                  <Component id="btnRunSimulation" min="-2" pref="273" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnStopSimulation" min="-2" pref="181" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnViewStats" min="-2" pref="113" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -645,12 +647,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="348" max="-2" attributes="0"/>
-                          <EmptySpace pref="52" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnRunSimulation" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="btnStopSimulation" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="btnRunSimulation" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="btnStopSimulation" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="btnViewStats" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <EmptySpace pref="82" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -680,7 +683,7 @@
                 <Component class="javax.swing.JButton" name="btnRunSimulation">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="16" style="1"/>
+                      <Font name="Tahoma" size="16" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Run"/>
                   </Properties>
@@ -694,6 +697,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopSimulationActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnViewStats">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="View Statisitcs"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewStatsActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

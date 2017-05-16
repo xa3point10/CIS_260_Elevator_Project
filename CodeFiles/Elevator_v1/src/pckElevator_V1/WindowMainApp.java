@@ -1,12 +1,7 @@
 package pckElevator_V1;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.util.ArrayList;
-import javax.swing.JTextArea;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;

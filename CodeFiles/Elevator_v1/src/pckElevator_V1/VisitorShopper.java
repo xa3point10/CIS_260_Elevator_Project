@@ -47,7 +47,7 @@ public class VisitorShopper implements /*extends*/ IVisitor {
         // They know how many floors are in the building
         System.out.println("DEBUG: VsitorShoper MaxFloor check = " + maxFloor);
         // They know the order they want to visit the floors
-        visitorAgenda.add(1);       // They begin on this floor #
+        //visitorAgenda.add(1);       // They begin on this floor #
         //visitorAgenda.add(3);       //and then they want to visit here
         //visitorAgenda.add(1);
         //visitorAgenda.add(3);
@@ -55,7 +55,7 @@ public class VisitorShopper implements /*extends*/ IVisitor {
         //visitorAgenda.add(1);
         visitorAgenda.add(randFloorPicker(maxFloor)); //and visit here
         visitorAgenda.add(randFloorPicker(maxFloor));
-        //visitorAgenda.add(0);       // End back in the garage
+        visitorAgenda.add(0);       // End back in the garage
         // begin in visiting state 
         state = VISITING;
         // visitor gets passed to the first floor in the agenda
@@ -77,7 +77,7 @@ public class VisitorShopper implements /*extends*/ IVisitor {
     }
 
     public void beginAgendaProtocol() {
-        System.out.println("\nVISITOR: ***NEW CYCLE Visitor ***\nbeginAgendaProtocol(): STATE = ["+state+"],PRECHeck currentFloor = " +currentFloor);
+        System.out.println("\nVISITOR: ***NEW CYCLE Visitor ***\nbeginAgendaProtocol(): STATE = ["+state+"],PRECHeck currentFloor = " +currentFloor+ " & nextDesired floor: "+this.nextDesiredFloor);
         elevators = ElevatorBank.GetInstance().getElevators();
         floors = ElevatorBank.GetInstance().getFloors();
         switch (state) {
